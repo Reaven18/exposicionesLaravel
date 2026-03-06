@@ -10,6 +10,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\ExposicionController;
 use App\Http\Controllers\RubricaController;
 use App\Http\Controllers\EvaluacionController;
+use App\Http\Controllers\MateriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('evaluaciones', EvaluacionController::class);
     Route::apiResource('grupos', GrupoController::class);
     Route::apiResource('equipos', EquipoController::class);
+    Route::apiResource('materias', MateriaController::class);
 
     // --- Rutas Especiales (Lógica Extra) ---
 
