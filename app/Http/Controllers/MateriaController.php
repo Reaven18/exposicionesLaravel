@@ -7,25 +7,25 @@ use Illuminate\Http\Request;
 
 class MateriaController extends Controller
 {
-     /**
+    /**
      * Listar todos los grupos con su materia y maestro
      */
     public function index()
     {
-        $materias = Materia::with(['materia'])->get();
+        $materias = Materia::all();
         return $this->sendResponse($materias, 'Materias recuperadas con éxito.');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'materia' => 'required|string|max:10'
+            'materia' => 'required|string'
         ]);
 
         $materia = Materia::create($request->all());
 
         return $this->sendResponse(
-            $materia->load(['materia']),
+            $materia,
             'Materia creado correctamente.',
             201
         );
@@ -36,8 +36,7 @@ class MateriaController extends Controller
      */
     public function show($id)
     {
-        $materia = Materia::with(['materia'])
-                      ->find($id);
+        $materia = Materia::find($id);
 
         if (!$materia) {
             return $this->sendError('Materia no encontrado.');
