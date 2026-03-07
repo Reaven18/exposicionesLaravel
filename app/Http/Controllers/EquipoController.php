@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+/**
+ * @group Gestión de Equipos
+ *
+ * Endpoints para administrar los equipos.
+ */
 class EquipoController extends Controller
 {
     // Listar todos los equipos con sus integrantes y grupo

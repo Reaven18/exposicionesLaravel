@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Evaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+/**
+ * @group Gestión de Evaluaciones
+ *
+ * Endpoints para administrar evaluaciones de exposiciones.
+ */
 class EvaluacionController extends Controller
 {
     /**

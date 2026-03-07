@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Grupo;
 use Illuminate\Http\Request;
-
+/**
+ * @group Gestión de Grupos
+ *
+ * Endpoints para administrar Grupos de una materia.
+ */
 class GrupoController extends Controller
 {
     /**

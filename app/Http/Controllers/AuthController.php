@@ -6,7 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+/**
+ * @group Gestión de Autenticación
+ *
+ * Endpoints para administrar la autenticación.
+ */
 class AuthController extends Controller
 {
     /**

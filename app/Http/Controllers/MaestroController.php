@@ -7,7 +7,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+/**
+ * @group Gestión de Maestros
+ *
+ * Endpoints para administrar maestros de la institución.
+ */
 class MaestroController extends Controller
 {
     // Listar todos los maestros con su información de usuario

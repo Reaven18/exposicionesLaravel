@@ -6,7 +6,11 @@ use App\Models\Rubrica;
 use App\Models\Criterio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+/**
+ * @group Gestión de Rubricas
+ *
+ * Endpoints para administrar rubricas de exposiciones.
+ */
 class RubricaController extends Controller
 {
     /**

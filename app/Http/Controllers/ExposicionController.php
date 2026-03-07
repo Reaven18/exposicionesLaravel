@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Exposicion;
 use Illuminate\Http\Request;
-
+/**
+ * @group Gestión de Exposiciones
+ *
+ * Endpoints para administrar exposiciones.
+ */
 class ExposicionController extends Controller
 {
     /**

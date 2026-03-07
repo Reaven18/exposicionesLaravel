@@ -25,3 +25,6 @@ Thumbs.db
 Dockerfile
 docker-compose.yml
 .docker/
+nginx.conf
+# Ignorar archivos temporales de Scribe
+/.scribe/

@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Materia;
 use Illuminate\Http\Request;
-
+/**
+ * @group Gestión de Materias
+ *
+ * Endpoints para la gestión del catálogo de materias de la institución.
+ */
 class MateriaController extends Controller
 {
     /**
