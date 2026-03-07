@@ -4,15 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Grupo;
 use Illuminate\Http\Request;
+
 /**
  * @group Gestión de Grupos
  *
- * Endpoints para administrar Grupos de una materia.
+ * Endpoints para administrar Grupos de una materia y la inscripción de alumnos.
  */
 class GrupoController extends Controller
 {
     /**
-     * Listar todos los grupos con su materia y maestro
+     * Listar todos los grupos.
+     * * Obtiene una lista de todos los grupos junto con la información de su materia y el maestro asignado.
+     *
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * {
+     * "id_grupo": 1,
+     * "id_materia": 5,
+     * "id_maestro": 2,
+     * "grupo": "A",
+     * "materia": { "id_materia": 5, "materia": "Programación Web" },
+     * "maestro": { "id_usuario": 2, "usuario": { "nombre": "Prof. García" } }
+     * }
+     * ],
+     * "message": "Grupos recuperados con éxito."
+     * }
      */
     public function index()
     {
@@ -21,7 +38,28 @@ class GrupoController extends Controller
     }
 
     /**
-     * Crear un nuevo grupo
+     * Crear un nuevo grupo.
+     *
+     * @bodyParam id_materia integer required El ID de la materia. Example: 1
+     * @bodyParam id_maestro integer required El ID del usuario que es maestro. Example: 2
+     * @bodyParam grupo string required El identificador del grupo (ej. A, B, 401). Max: 10 caracteres. Example: 601-A
+     *
+     * @response 201 {
+     * "success": true,
+     * "data": {
+     * "id_grupo": 10,
+     * "id_materia": 1,
+     * "id_maestro": 2,
+     * "grupo": "601-A",
+     * "materia": { "id_materia": 1, "materia": "Matemáticas" },
+     * "maestro": { "id_usuario": 2, "usuario": { "nombre": "Prof. García" } }
+     * },
+     * "message": "Grupo creado correctamente."
+     * }
+     * @response 422 {
+     * "message": "The given data was invalid.",
+     * "errors": { "id_materia": ["The selected id materia is invalid."] }
+     * }
      */
     public function store(Request $request)
     {
@@ -41,7 +79,27 @@ class GrupoController extends Controller
     }
 
     /**
-     * Mostrar un grupo específico con sus alumnos inscritos
+     * Mostrar un grupo específico.
+     * * Retorna los detalles de un grupo incluyendo la lista de alumnos inscritos.
+     *
+     * @urlParam id integer required El ID del grupo. Example: 1
+     *
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_grupo": 1,
+     * "grupo": "A",
+     * "alumnos": [
+     * { "id_usuario": 10, "usuario": { "nombre": "Alumno Ejemplo" } }
+     * ]
+     * },
+     * "message": "Detalles del grupo obtenidos."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Grupo no encontrado.",
+     * "data": []
+     * }
      */
     public function show($id)
     {
@@ -49,15 +107,32 @@ class GrupoController extends Controller
                       ->find($id);
 
         if (!$grupo) {
-            return $this->sendError('Grupo no encontrado.');
+            return $this->sendError('Grupo no encontrado.', [], 404);
         }
 
         return $this->sendResponse($grupo, 'Detalles del grupo obtenidos.');
     }
 
     /**
-     * Inscribir o actualizar la lista de alumnos del grupo
-     * Se espera un array de IDs de alumnos (id_usuario)
+     * Inscribir alumnos al grupo.
+     * * Actualiza la lista de alumnos mediante el método sync (reemplaza la lista actual por la nueva).
+     *
+     * @urlParam id integer required El ID del grupo. Example: 1
+     * @bodyParam alumnos int[] required Array con los IDs (id_usuario) de los alumnos a inscribir. Example: [10, 11, 12]
+     *
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_grupo": 1,
+     * "alumnos": [ { "id_usuario": 10, "usuario": {...} } ]
+     * },
+     * "message": "Lista de alumnos actualizada correctamente."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Grupo no encontrado.",
+     * "data": []
+     * }
      */
     public function inscribirAlumnos(Request $request, $id)
     {
@@ -67,9 +142,8 @@ class GrupoController extends Controller
         ]);
 
         $grupo = Grupo::find($id);
-        if (!$grupo) return $this->sendError('Grupo no encontrado.');
+        if (!$grupo) return $this->sendError('Grupo no encontrado.', [], 404);
 
-        // sync() elimina los que no estén en el array y agrega los nuevos
         $grupo->alumnos()->sync($request->alumnos);
 
         return $this->sendResponse(
@@ -79,12 +153,25 @@ class GrupoController extends Controller
     }
 
     /**
-     * Eliminar un grupo
+     * Eliminar un grupo.
+     *
+     * @urlParam id integer required El ID del grupo a eliminar. Example: 1
+     *
+     * @response 200 {
+     * "success": true,
+     * "data": [],
+     * "message": "Grupo eliminado exitosamente."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Grupo no encontrado.",
+     * "data": []
+     * }
      */
     public function destroy($id)
     {
         $grupo = Grupo::find($id);
-        if (!$grupo) return $this->sendError('Grupo no encontrado.');
+        if (!$grupo) return $this->sendError('Grupo no encontrado.', [], 404);
 
         $grupo->delete();
         return $this->sendResponse([], 'Grupo eliminado exitosamente.');

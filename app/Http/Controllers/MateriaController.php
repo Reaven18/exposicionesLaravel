@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Materia;
 use Illuminate\Http\Request;
+
 /**
  * @group Gestión de Materias
  *
@@ -12,7 +13,16 @@ use Illuminate\Http\Request;
 class MateriaController extends Controller
 {
     /**
-     * Listar todos los grupos con su materia y maestro
+     * Listar todas las materias.
+     *
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * { "id_materia": 1, "materia": "Cálculo Diferencial" },
+     * { "id_materia": 2, "materia": "Física" }
+     * ],
+     * "message": "Materias recuperadas con éxito."
+     * }
      */
     public function index()
     {
@@ -20,6 +30,21 @@ class MateriaController extends Controller
         return $this->sendResponse($materias, 'Materias recuperadas con éxito.');
     }
 
+    /**
+     * Crear una nueva materia.
+     *
+     * @bodyParam materia string required Nombre de la materia. Example: Inteligencia Artificial
+     *
+     * @response 201 {
+     * "success": true,
+     * "data": { "id_materia": 15, "materia": "Inteligencia Artificial" },
+     * "message": "Materia creado correctamente."
+     * }
+     * @response 422 {
+     * "message": "The given data was invalid.",
+     * "errors": { "materia": ["The materia field is required."] }
+     * }
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -36,23 +61,52 @@ class MateriaController extends Controller
     }
 
     /**
-     * Mostrar un grupo específico con sus alumnos inscritos
+     * Mostrar una materia específica.
+     *
+     * @urlParam id integer required El ID de la materia. Example: 1
+     *
+     * @response 200 {
+     * "success": true,
+     * "data": { "id_materia": 1, "materia": "Cálculo Diferencial" },
+     * "message": "Detalles de las materias obtenidos."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Materia no encontrada.",
+     * "data": []
+     * }
      */
     public function show($id)
     {
         $materia = Materia::find($id);
 
         if (!$materia) {
-            return $this->sendError('Materia no encontrado.');
+            return $this->sendError('Materia no encontrada.', [], 404);
         }
 
         return $this->sendResponse($materia, 'Detalles de las materias obtenidos.');
     }
 
+    /**
+     * Eliminar una materia.
+     *
+     * @urlParam id integer required El ID de la materia a eliminar. Example: 1
+     *
+     * @response 200 {
+     * "success": true,
+     * "data": [],
+     * "message": "Materia eliminada exitosamente."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Materia no encontrada.",
+     * "data": []
+     * }
+     */
     public function destroy($id)
     {
         $materia = Materia::find($id);
-        if (!$materia) return $this->sendError('Materia no encontrado.');
+        if (!$materia) return $this->sendError('Materia no encontrada.', [], 404);
 
         $materia->delete();
         return $this->sendResponse([], 'Materia eliminada exitosamente.');

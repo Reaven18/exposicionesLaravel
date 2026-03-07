@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rubrica;
-use App\Models\Criterio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 /**
  * @group Gestión de Rubricas
- *
- * Endpoints para administrar rubricas de exposiciones.
  */
 class RubricaController extends Controller
 {
     /**
-     * Listar todas las rúbricas con sus criterios
+     * Listar rúbricas.
+     * @response 200 { "success": true, "data": [...] }
      */
     public function index()
     {
@@ -23,7 +22,12 @@ class RubricaController extends Controller
     }
 
     /**
-     * Crear una rúbrica junto con sus criterios (Todo en uno)
+     * Crear rúbrica con criterios.
+     * @bodyParam rubrica string required Nombre. Example: Rubrica Final
+     * @bodyParam criterios object[] required
+     * @bodyParam criterios[].descripcion string required. Example: Dominio del tema
+     * @bodyParam criterios[].porcentaje number required (1-100). Example: 30
+     * @response 201 { "success": true, "data": {...} }
      */
     public function store(Request $request)
     {
@@ -36,51 +40,37 @@ class RubricaController extends Controller
 
         try {
             $nuevaRubrica = DB::transaction(function () use ($request) {
-                // 1. Crear la cabecera de la rúbrica
-                $rubrica = Rubrica::create([
-                    'rubrica' => $request->rubrica
-                ]);
-
-                // 2. Crear cada criterio asociado
+                $rubrica = Rubrica::create(['rubrica' => $request->rubrica]);
                 foreach ($request->criterios as $criterio) {
-                    $rubrica->criterios()->create([
-                        'descripcion' => $criterio['descripcion'],
-                        'porcentaje'  => $criterio['porcentaje']
-                    ]);
+                    $rubrica->criterios()->create($criterio);
                 }
-
                 return $rubrica->load('criterios');
             });
-
             return $this->sendResponse($nuevaRubrica, 'Rúbrica y criterios creados con éxito.', 201);
-
         } catch (\Exception $e) {
             return $this->sendError('Error al crear la rúbrica.', [$e->getMessage()], 500);
         }
     }
 
     /**
-     * Mostrar una rúbrica específica
+     * Ver rúbrica.
+     * @urlParam id integer required
      */
     public function show($id)
     {
         $rubrica = Rubrica::with('criterios')->find($id);
-
-        if (!$rubrica) {
-            return $this->sendError('Rúbrica no encontrada.');
-        }
-
+        if (!$rubrica) return $this->sendError('Rúbrica no encontrada.', [], 404);
         return $this->sendResponse($rubrica, 'Detalles de la rúbrica obtenidos.');
     }
 
     /**
-     * Eliminar rúbrica (Borrará criterios por cascada)
+     * Eliminar rúbrica.
+     * @urlParam id integer required
      */
     public function destroy($id)
     {
         $rubrica = Rubrica::find($id);
-        if (!$rubrica) return $this->sendError('Rúbrica no encontrada.');
-
+        if (!$rubrica) return $this->sendError('Rúbrica no encontrada.', [], 404);
         $rubrica->delete();
         return $this->sendResponse([], 'Rúbrica eliminada correctamente.');
     }

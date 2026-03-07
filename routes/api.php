@@ -31,6 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // --- Autenticación y Usuario Actual ---
     Route::get('/me', [AuthController::class, 'me']); // El endpoint que faltaba
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+
 
     // --- CRUDs Automáticos (apiResource) ---
     // Esto crea GET, POST, PUT y DELETE para cada uno

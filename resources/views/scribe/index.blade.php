@@ -94,13 +94,16 @@
                 </li>
                                     <ul id="tocify-subheader-gestion-de-autenticacion" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-autenticacion-POSTapi-login">
-                                <a href="#gestion-de-autenticacion-POSTapi-login">Inicio de sesión</a>
+                                <a href="#gestion-de-autenticacion-POSTapi-login">Inicio de sesión.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-autenticacion-GETapi-me">
-                                <a href="#gestion-de-autenticacion-GETapi-me">GET api/me</a>
+                                <a href="#gestion-de-autenticacion-GETapi-me">Obtener perfil del usuario logueado.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-autenticacion-POSTapi-logout">
-                                <a href="#gestion-de-autenticacion-POSTapi-logout">Cerrar sesión</a>
+                                <a href="#gestion-de-autenticacion-POSTapi-logout">Cerrar sesión.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="gestion-de-autenticacion-POSTapi-register">
+                                <a href="#gestion-de-autenticacion-POSTapi-register">Registro de usuario.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -110,19 +113,19 @@
                 </li>
                                     <ul id="tocify-subheader-gestion-de-equipos" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-equipos-GETapi-equipos">
-                                <a href="#gestion-de-equipos-GETapi-equipos">GET api/equipos</a>
+                                <a href="#gestion-de-equipos-GETapi-equipos">Listar equipos.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-equipos-POSTapi-equipos">
-                                <a href="#gestion-de-equipos-POSTapi-equipos">POST api/equipos</a>
+                                <a href="#gestion-de-equipos-POSTapi-equipos">Crear un equipo.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-equipos-GETapi-equipos--id-">
-                                <a href="#gestion-de-equipos-GETapi-equipos--id-">GET api/equipos/{id}</a>
+                                <a href="#gestion-de-equipos-GETapi-equipos--id-">Ver un equipo específico.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-equipos-DELETEapi-equipos--id-">
-                                <a href="#gestion-de-equipos-DELETEapi-equipos--id-">DELETE api/equipos/{id}</a>
+                                <a href="#gestion-de-equipos-DELETEapi-equipos--id-">Eliminar equipo.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-equipos-PUTapi-equipos--id--integrantes">
-                                <a href="#gestion-de-equipos-PUTapi-equipos--id--integrantes">PUT api/equipos/{id}/integrantes</a>
+                                <a href="#gestion-de-equipos-PUTapi-equipos--id--integrantes">Actualizar integrantes.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -132,14 +135,13 @@
                 </li>
                                     <ul id="tocify-subheader-gestion-de-evaluaciones" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-evaluaciones-GETapi-evaluaciones">
-                                <a href="#gestion-de-evaluaciones-GETapi-evaluaciones">Listar evaluaciones con sus detalles</a>
+                                <a href="#gestion-de-evaluaciones-GETapi-evaluaciones">Listar evaluaciones.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-evaluaciones-POSTapi-evaluaciones">
-                                <a href="#gestion-de-evaluaciones-POSTapi-evaluaciones">Guardar una nueva evaluación
-Se espera un JSON con id_expo, id_usuario y un array de notas por criterio</a>
+                                <a href="#gestion-de-evaluaciones-POSTapi-evaluaciones">Guardar evaluación.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-evaluaciones-GETapi-evaluaciones--id-">
-                                <a href="#gestion-de-evaluaciones-GETapi-evaluaciones--id-">Ver el resultado de una evaluación específica</a>
+                                <a href="#gestion-de-evaluaciones-GETapi-evaluaciones--id-">Ver evaluación específica.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -149,20 +151,19 @@ Se espera un JSON con id_expo, id_usuario y un array de notas por criterio</a>
                 </li>
                                     <ul id="tocify-subheader-gestion-de-exposiciones" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-exposiciones-GETapi-exposiciones">
-                                <a href="#gestion-de-exposiciones-GETapi-exposiciones">Listar todas las exposiciones programadas</a>
+                                <a href="#gestion-de-exposiciones-GETapi-exposiciones">Listar exposiciones.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-exposiciones-POSTapi-exposiciones">
-                                <a href="#gestion-de-exposiciones-POSTapi-exposiciones">Programar una nueva exposición</a>
+                                <a href="#gestion-de-exposiciones-POSTapi-exposiciones">Programar exposición.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-exposiciones-GETapi-exposiciones--id-">
-                                <a href="#gestion-de-exposiciones-GETapi-exposiciones--id-">Ver detalles de una exposición (incluyendo criterios de su rúbrica)
-Útil para cuando el evaluador abre el formulario de calificación</a>
+                                <a href="#gestion-de-exposiciones-GETapi-exposiciones--id-">Ver exposición.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-exposiciones-PUTapi-exposiciones--id-">
-                                <a href="#gestion-de-exposiciones-PUTapi-exposiciones--id-">Actualizar fecha o tema</a>
+                                <a href="#gestion-de-exposiciones-PUTapi-exposiciones--id-">Actualizar exposición.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-exposiciones-DELETEapi-exposiciones--id-">
-                                <a href="#gestion-de-exposiciones-DELETEapi-exposiciones--id-">Cancelar una exposición</a>
+                                <a href="#gestion-de-exposiciones-DELETEapi-exposiciones--id-">Eliminar exposición.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -172,20 +173,19 @@ Se espera un JSON con id_expo, id_usuario y un array de notas por criterio</a>
                 </li>
                                     <ul id="tocify-subheader-gestion-de-grupos" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-grupos-GETapi-grupos">
-                                <a href="#gestion-de-grupos-GETapi-grupos">Listar todos los grupos con su materia y maestro</a>
+                                <a href="#gestion-de-grupos-GETapi-grupos">Listar todos los grupos.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-grupos-POSTapi-grupos">
-                                <a href="#gestion-de-grupos-POSTapi-grupos">Crear un nuevo grupo</a>
+                                <a href="#gestion-de-grupos-POSTapi-grupos">Crear un nuevo grupo.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-grupos-GETapi-grupos--id-">
-                                <a href="#gestion-de-grupos-GETapi-grupos--id-">Mostrar un grupo específico con sus alumnos inscritos</a>
+                                <a href="#gestion-de-grupos-GETapi-grupos--id-">Mostrar un grupo específico.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-grupos-DELETEapi-grupos--id-">
-                                <a href="#gestion-de-grupos-DELETEapi-grupos--id-">Eliminar un grupo</a>
+                                <a href="#gestion-de-grupos-DELETEapi-grupos--id-">Eliminar un grupo.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-grupos-POSTapi-grupos--id--inscribir">
-                                <a href="#gestion-de-grupos-POSTapi-grupos--id--inscribir">Inscribir o actualizar la lista de alumnos del grupo
-Se espera un array de IDs de alumnos (id_usuario)</a>
+                                <a href="#gestion-de-grupos-POSTapi-grupos--id--inscribir">Inscribir alumnos al grupo.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -195,19 +195,19 @@ Se espera un array de IDs de alumnos (id_usuario)</a>
                 </li>
                                     <ul id="tocify-subheader-gestion-de-maestros" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-maestros-GETapi-maestros">
-                                <a href="#gestion-de-maestros-GETapi-maestros">GET api/maestros</a>
+                                <a href="#gestion-de-maestros-GETapi-maestros">Listar maestros.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-maestros-POSTapi-maestros">
-                                <a href="#gestion-de-maestros-POSTapi-maestros">POST api/maestros</a>
+                                <a href="#gestion-de-maestros-POSTapi-maestros">Crear maestro.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-maestros-GETapi-maestros--id-">
-                                <a href="#gestion-de-maestros-GETapi-maestros--id-">GET api/maestros/{id}</a>
+                                <a href="#gestion-de-maestros-GETapi-maestros--id-">Ver maestro específico.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-maestros-PUTapi-maestros--id-">
-                                <a href="#gestion-de-maestros-PUTapi-maestros--id-">PUT api/maestros/{id}</a>
+                                <a href="#gestion-de-maestros-PUTapi-maestros--id-">Actualizar maestro.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-maestros-DELETEapi-maestros--id-">
-                                <a href="#gestion-de-maestros-DELETEapi-maestros--id-">DELETE api/maestros/{id}</a>
+                                <a href="#gestion-de-maestros-DELETEapi-maestros--id-">Eliminar maestro.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -217,16 +217,16 @@ Se espera un array de IDs de alumnos (id_usuario)</a>
                 </li>
                                     <ul id="tocify-subheader-gestion-de-materias" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-materias-GETapi-materias">
-                                <a href="#gestion-de-materias-GETapi-materias">Listar todos los grupos con su materia y maestro</a>
+                                <a href="#gestion-de-materias-GETapi-materias">Listar todas las materias.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-materias-POSTapi-materias">
-                                <a href="#gestion-de-materias-POSTapi-materias">POST api/materias</a>
+                                <a href="#gestion-de-materias-POSTapi-materias">Crear una nueva materia.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-materias-GETapi-materias--id-">
-                                <a href="#gestion-de-materias-GETapi-materias--id-">Mostrar un grupo específico con sus alumnos inscritos</a>
+                                <a href="#gestion-de-materias-GETapi-materias--id-">Mostrar una materia específica.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-materias-DELETEapi-materias--id-">
-                                <a href="#gestion-de-materias-DELETEapi-materias--id-">DELETE api/materias/{id}</a>
+                                <a href="#gestion-de-materias-DELETEapi-materias--id-">Eliminar una materia.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -236,16 +236,16 @@ Se espera un array de IDs de alumnos (id_usuario)</a>
                 </li>
                                     <ul id="tocify-subheader-gestion-de-rubricas" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="gestion-de-rubricas-GETapi-rubricas">
-                                <a href="#gestion-de-rubricas-GETapi-rubricas">Listar todas las rúbricas con sus criterios</a>
+                                <a href="#gestion-de-rubricas-GETapi-rubricas">Listar rúbricas.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-rubricas-POSTapi-rubricas">
-                                <a href="#gestion-de-rubricas-POSTapi-rubricas">Crear una rúbrica junto con sus criterios (Todo en uno)</a>
+                                <a href="#gestion-de-rubricas-POSTapi-rubricas">Crear rúbrica con criterios.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-rubricas-GETapi-rubricas--id-">
-                                <a href="#gestion-de-rubricas-GETapi-rubricas--id-">Mostrar una rúbrica específica</a>
+                                <a href="#gestion-de-rubricas-GETapi-rubricas--id-">Ver rúbrica.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-rubricas-DELETEapi-rubricas--id-">
-                                <a href="#gestion-de-rubricas-DELETEapi-rubricas--id-">Eliminar rúbrica (Borrará criterios por cascada)</a>
+                                <a href="#gestion-de-rubricas-DELETEapi-rubricas--id-">Eliminar rúbrica.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -514,7 +514,7 @@ fetch(url, {
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Error al procesar el registro&quot;,
     &quot;data&quot;: [
-        &quot;Detalle t&eacute;cnico del error...&quot;
+        &quot;Algo dentro del servidor fall&oacute;...&quot;
     ]
 }</code>
  </pre>
@@ -1169,9 +1169,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
                 <h1 id="gestion-de-autenticacion">Gestión de Autenticación</h1>
 
-    <p>Endpoints para administrar la autenticación.</p>
+    <p>Endpoints para administrar el acceso al sistema.</p>
 
-                                <h2 id="gestion-de-autenticacion-POSTapi-login">Inicio de sesión</h2>
+                                <h2 id="gestion-de-autenticacion-POSTapi-login">Inicio de sesión.</h2>
 
 <p>
 </p>
@@ -1188,8 +1188,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"qkunze@example.com\",
-    \"password\": \"consequatur\"
+    \"email\": \"admin@example.com\",
+    \"password\": \"password\"
 }"
 </code></pre></div>
 
@@ -1205,8 +1205,8 @@ const headers = {
 };
 
 let body = {
-    "email": "qkunze@example.com",
-    "password": "consequatur"
+    "email": "admin@example.com",
+    "password": "password"
 };
 
 fetch(url, {
@@ -1218,7 +1218,47 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-login">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;token&quot;: &quot;1|ra67sdf...&quot;,
+        &quot;user&quot;: {
+            &quot;id_usuario&quot;: 1,
+            &quot;nombre&quot;: &quot;Admin&quot;,
+            &quot;email&quot;: &quot;admin@example.com&quot;,
+            &quot;id_rol&quot;: 1,
+            &quot;created_at&quot;: &quot;2026-03-06T18:01:01.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2026-03-06T18:01:01.000000Z&quot;,
+            &quot;rol&quot;: {
+                &quot;id_rol&quot;: 1,
+                &quot;nombre_rol&quot;: &quot;Maestro&quot;,
+                &quot;created_at&quot;: &quot;2026-03-06T18:01:00.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2026-03-06T18:01:00.000000Z&quot;
+            }
+        }
+    },
+    &quot;message&quot;: &quot;Usuario autenticado con &eacute;xito.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Credenciales incorrectas.&quot;,
+    &quot;data&quot;: {
+        &quot;error&quot;: &quot;No autorizado&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-login" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-login"></span>:
@@ -1298,10 +1338,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-login"
-               value="qkunze@example.com"
+               value="admin@example.com"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>qkunze@example.com</code></p>
+<p>El correo del usuario. Example: <code>admin@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -1310,16 +1350,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-login"
-               value="consequatur"
+               value="password"
                data-component="body">
     <br>
-<p>Example: <code>consequatur</code></p>
+<p>La contraseña. Example: <code>password</code></p>
         </div>
         </form>
 
-                    <h2 id="gestion-de-autenticacion-GETapi-me">GET api/me</h2>
+                    <h2 id="gestion-de-autenticacion-GETapi-me">Obtener perfil del usuario logueado.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -1355,20 +1396,11 @@ fetch(url, {
 
 <span id="example-responses-GETapi-me">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: { &quot;id_usuario&quot;: 1, &quot;nombre&quot;: &quot;...&quot;, &quot;alumno&quot;: {...} }, &quot;message&quot;: &quot;Datos del usuario logueado.&quot; }</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-me" hidden>
@@ -1388,7 +1420,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-me" data-method="GET"
       data-path="api/me"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -1444,9 +1476,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-autenticacion-POSTapi-logout">Cerrar sesión</h2>
+                    <h2 id="gestion-de-autenticacion-POSTapi-logout">Cerrar sesión.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -1481,7 +1514,18 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-logout">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [],
+    &quot;message&quot;: &quot;Sesi&oacute;n cerrada y token eliminado.&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-logout" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-logout"></span>:
@@ -1499,7 +1543,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-POSTapi-logout" data-method="POST"
       data-path="api/logout"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -1555,11 +1599,210 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                    <h2 id="gestion-de-autenticacion-POSTapi-register">Registro de usuario.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Nuevo Usuario\",
+    \"email\": \"nuevo@example.com\",
+    \"password\": \"password123\",
+    \"id_rol\": 2,
+    \"password_confirmation\": \"password123\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "nombre": "Nuevo Usuario",
+    "email": "nuevo@example.com",
+    "password": "password123",
+    "id_rol": 2,
+    "password_confirmation": "password123"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-register">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+&quot;success&quot;: true,
+&quot;data&quot;: { &quot;token&quot;: &quot;1|ra67sdf...&quot;, &quot;user&quot;: {...} },
+&quot;message&quot;: &quot;Usuario registrado correctamente.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-register"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-register">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-register" data-method="POST"
+      data-path="api/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-register"
+                    onclick="tryItOut('POSTapi-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-register"
+                    onclick="cancelTryOut('POSTapi-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-register"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/register</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="POSTapi-register"
+               value="Nuevo Usuario"
+               data-component="body">
+    <br>
+<p>Nombre completo. Example: <code>Nuevo Usuario</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-register"
+               value="nuevo@example.com"
+               data-component="body">
+    <br>
+<p>Correo único. Example: <code>nuevo@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-register"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Mínimo 8 caracteres. Example: <code>password123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>id_rol</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id_rol"                data-endpoint="POSTapi-register"
+               value="2"
+               data-component="body">
+    <br>
+<p>ID del rol. Example: <code>2</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password_confirmation"                data-endpoint="POSTapi-register"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Debe coincidir con password. Example: <code>password123</code></p>
+        </div>
+        </form>
+
                 <h1 id="gestion-de-equipos">Gestión de Equipos</h1>
 
-    <p>Endpoints para administrar los equipos.</p>
+    
 
-                                <h2 id="gestion-de-equipos-GETapi-equipos">GET api/equipos</h2>
+                                <h2 id="gestion-de-equipos-GETapi-equipos">Listar equipos.</h2>
 
 <p>
 </p>
@@ -1597,20 +1840,11 @@ fetch(url, {
 
 <span id="example-responses-GETapi-equipos">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: [...], &quot;message&quot;: &quot;Equipos recuperados exitosamente.&quot; }</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-equipos" hidden>
@@ -1686,7 +1920,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-equipos-POSTapi-equipos">POST api/equipos</h2>
+                    <h2 id="gestion-de-equipos-POSTapi-equipos">Crear un equipo.</h2>
 
 <p>
 </p>
@@ -1703,8 +1937,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_grupo\": \"consequatur\",
-    \"equipo\": \"mqeopfuudtdsufvyvddqa\"
+    \"id_grupo\": 1,
+    \"equipo\": \"Los Dinamita\",
+    \"alumnos\": [
+        1,
+        2,
+        3
+    ]
 }"
 </code></pre></div>
 
@@ -1720,8 +1959,13 @@ const headers = {
 };
 
 let body = {
-    "id_grupo": "consequatur",
-    "equipo": "mqeopfuudtdsufvyvddqa"
+    "id_grupo": 1,
+    "equipo": "Los Dinamita",
+    "alumnos": [
+        1,
+        2,
+        3
+    ]
 };
 
 fetch(url, {
@@ -1733,7 +1977,27 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-equipos">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...}, &quot;message&quot;: &quot;Equipo creado e integrantes asignados.&quot; }</code>
+ </pre>
+            <blockquote>
+            <p>Example response (500):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Error al crear el equipo.&quot;,
+    &quot;data&quot;: [
+        &quot;...&quot;
+    ]
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-equipos" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-equipos"></span>:
@@ -1808,15 +2072,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_grupo</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id_grupo"                data-endpoint="POSTapi-equipos"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_grupo"                data-endpoint="POSTapi-equipos"
+               value="1"
                data-component="body">
     <br>
-<p>The <code>id_grupo</code> of an existing record in the grupos table. Example: <code>consequatur</code></p>
+<p>ID del grupo. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>equipo</code></b>&nbsp;&nbsp;
@@ -1825,28 +2089,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="equipo"                data-endpoint="POSTapi-equipos"
-               value="mqeopfuudtdsufvyvddqa"
+               value="Los Dinamita"
                data-component="body">
     <br>
-<p>Must not be greater than 100 characters. Example: <code>mqeopfuudtdsufvyvddqa</code></p>
+<p>Nombre del equipo. Example: <code>Los Dinamita</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>alumnos</code></b>&nbsp;&nbsp;
-<small>string[]</small>&nbsp;
-<i>optional</i> &nbsp;
+<small>integer[]</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="alumnos[0]"                data-endpoint="POSTapi-equipos"
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="alumnos[0]"                data-endpoint="POSTapi-equipos"
                data-component="body">
-        <input type="text" style="display: none"
+        <input type="number" style="display: none"
                name="alumnos[1]"                data-endpoint="POSTapi-equipos"
                data-component="body">
     <br>
-<p>Array de IDs de alumnos. The <code>id_usuario</code> of an existing record in the alumnos table.</p>
+<p>IDs de los alumnos (id_usuario).</p>
         </div>
         </form>
 
-                    <h2 id="gestion-de-equipos-GETapi-equipos--id-">GET api/equipos/{id}</h2>
+                    <h2 id="gestion-de-equipos-GETapi-equipos--id-">Ver un equipo específico.</h2>
 
 <p>
 </p>
@@ -1859,14 +2123,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/equipos/consequatur" \
+    --get "http://localhost:8000/api/equipos/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos/consequatur"
+    "http://localhost:8000/api/equipos/1"
 );
 
 const headers = {
@@ -1884,19 +2148,21 @@ fetch(url, {
 
 <span id="example-responses-GETapi-equipos--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...}, &quot;message&quot;: &quot;Detalles del equipo recuperados.&quot; }</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Equipo no encontrado.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -1974,19 +2240,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-equipos--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-equipos--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the equipo. Example: <code>consequatur</code></p>
+<p>ID del equipo. Example: <code>1</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-equipos-DELETEapi-equipos--id-">DELETE api/equipos/{id}</h2>
+                    <h2 id="gestion-de-equipos-DELETEapi-equipos--id-">Eliminar equipo.</h2>
 
 <p>
 </p>
@@ -1999,14 +2265,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/equipos/consequatur" \
+    "http://localhost:8000/api/equipos/17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos/consequatur"
+    "http://localhost:8000/api/equipos/17"
 );
 
 const headers = {
@@ -2023,7 +2289,17 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-equipos--id-">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Equipo eliminado correctamente.&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-equipos--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-equipos--id-"></span>:
@@ -2098,19 +2374,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-equipos--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-equipos--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the equipo. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-equipos-PUTapi-equipos--id--integrantes">PUT api/equipos/{id}/integrantes</h2>
+                    <h2 id="gestion-de-equipos-PUTapi-equipos--id--integrantes">Actualizar integrantes.</h2>
 
 <p>
 </p>
@@ -2123,15 +2399,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/equipos/consequatur/integrantes" \
+    "http://localhost:8000/api/equipos/17/integrantes" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
+    --data "{
+    \"alumnos\": [
+        4,
+        5
+    ]
+}"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos/consequatur/integrantes"
+    "http://localhost:8000/api/equipos/17/integrantes"
 );
 
 const headers = {
@@ -2139,16 +2421,41 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "alumnos": [
+        4,
+        5
+    ]
+};
 
 fetch(url, {
     method: "PUT",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
 
 <span id="example-responses-PUTapi-equipos--id--integrantes">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...}, &quot;message&quot;: &quot;Integrantes actualizados.&quot; }</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Equipo no encontrado.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-equipos--id--integrantes" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-equipos--id--integrantes"></span>:
@@ -2223,38 +2530,38 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-equipos--id--integrantes"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-equipos--id--integrantes"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the equipo. Example: <code>consequatur</code></p>
+<p>ID del equipo. Example: <code>17</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>alumnos</code></b>&nbsp;&nbsp;
-<small>string[]</small>&nbsp;
-<i>optional</i> &nbsp;
+<small>integer[]</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="alumnos[0]"                data-endpoint="PUTapi-equipos--id--integrantes"
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="alumnos[0]"                data-endpoint="PUTapi-equipos--id--integrantes"
                data-component="body">
-        <input type="text" style="display: none"
+        <input type="number" style="display: none"
                name="alumnos[1]"                data-endpoint="PUTapi-equipos--id--integrantes"
                data-component="body">
     <br>
-<p>The <code>id_usuario</code> of an existing record in the alumnos table.</p>
+<p>Nuevos IDs de alumnos.</p>
         </div>
         </form>
 
                 <h1 id="gestion-de-evaluaciones">Gestión de Evaluaciones</h1>
 
-    <p>Endpoints para administrar evaluaciones de exposiciones.</p>
+    
 
-                                <h2 id="gestion-de-evaluaciones-GETapi-evaluaciones">Listar evaluaciones con sus detalles</h2>
+                                <h2 id="gestion-de-evaluaciones-GETapi-evaluaciones">Listar evaluaciones.</h2>
 
 <p>
 </p>
@@ -2292,20 +2599,11 @@ fetch(url, {
 
 <span id="example-responses-GETapi-evaluaciones">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: [...], &quot;message&quot;: &quot;Evaluaciones recuperadas.&quot; }</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-evaluaciones" hidden>
@@ -2381,8 +2679,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-evaluaciones-POSTapi-evaluaciones">Guardar una nueva evaluación
-Se espera un JSON con id_expo, id_usuario y un array de notas por criterio</h2>
+                    <h2 id="gestion-de-evaluaciones-POSTapi-evaluaciones">Guardar evaluación.</h2>
 
 <p>
 </p>
@@ -2399,13 +2696,13 @@ Se espera un JSON con id_expo, id_usuario y un array de notas por criterio</h2>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_expo\": \"consequatur\",
-    \"id_usuario\": \"consequatur\",
-    \"observaciones\": \"consequatur\",
+    \"id_expo\": 1,
+    \"id_usuario\": 1,
+    \"observaciones\": \"Muy buena dicción.\",
     \"calificaciones\": [
         {
-            \"id_criterio\": \"consequatur\",
-            \"nota\": 5
+            \"id_criterio\": 1,
+            \"nota\": 9.5
         }
     ]
 }"
@@ -2423,13 +2720,13 @@ const headers = {
 };
 
 let body = {
-    "id_expo": "consequatur",
-    "id_usuario": "consequatur",
-    "observaciones": "consequatur",
+    "id_expo": 1,
+    "id_usuario": 1,
+    "observaciones": "Muy buena dicción.",
     "calificaciones": [
         {
-            "id_criterio": "consequatur",
-            "nota": 5
+            "id_criterio": 1,
+            "nota": 9.5
         }
     ]
 };
@@ -2518,27 +2815,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_expo</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id_expo"                data-endpoint="POSTapi-evaluaciones"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_expo"                data-endpoint="POSTapi-evaluaciones"
+               value="1"
                data-component="body">
     <br>
-<p>The <code>id_expo</code> of an existing record in the exposiciones table. Example: <code>consequatur</code></p>
+<p>ID exposición. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_usuario</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id_usuario"                data-endpoint="POSTapi-evaluaciones"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_usuario"                data-endpoint="POSTapi-evaluaciones"
+               value="1"
                data-component="body">
     <br>
-<p>The <code>id_usuario</code> of an existing record in the usuarios table. Example: <code>consequatur</code></p>
+<p>ID del evaluador. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>observaciones</code></b>&nbsp;&nbsp;
@@ -2547,10 +2844,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="observaciones"                data-endpoint="POSTapi-evaluaciones"
-               value="consequatur"
+               value="Muy buena dicción."
                data-component="body">
     <br>
-<p>Example: <code>consequatur</code></p>
+<p>Notas opcionales. Example: <code>Muy buena dicción.</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -2560,19 +2857,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
 <br>
-
+<p>Array de calificaciones.</p>
             </summary>
                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>id_criterio</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="calificaciones.0.id_criterio"                data-endpoint="POSTapi-evaluaciones"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="calificaciones.0.id_criterio"                data-endpoint="POSTapi-evaluaciones"
+               value="1"
                data-component="body">
     <br>
-<p>Array de [id_criterio =&gt; nota]. The <code>id_criterios</code> of an existing record in the criterios table. Example: <code>consequatur</code></p>
+<p>ID del criterio. Example: <code>1</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>nota</code></b>&nbsp;&nbsp;
@@ -2581,16 +2878,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="calificaciones.0.nota"                data-endpoint="POSTapi-evaluaciones"
-               value="5"
+               value="9.5"
                data-component="body">
     <br>
-<p>Must be at least 0. Must not be greater than 10. Example: <code>5</code></p>
+<p>Nota (0-10). Example: <code>9.5</code></p>
                     </div>
                                     </details>
         </div>
         </form>
 
-                    <h2 id="gestion-de-evaluaciones-GETapi-evaluaciones--id-">Ver el resultado de una evaluación específica</h2>
+                    <h2 id="gestion-de-evaluaciones-GETapi-evaluaciones--id-">Ver evaluación específica.</h2>
 
 <p>
 </p>
@@ -2603,14 +2900,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/evaluaciones/consequatur" \
+    --get "http://localhost:8000/api/evaluaciones/17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/evaluaciones/consequatur"
+    "http://localhost:8000/api/evaluaciones/17"
 );
 
 const headers = {
@@ -2628,19 +2925,20 @@ fetch(url, {
 
 <span id="example-responses-GETapi-evaluaciones--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...} }</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Evaluaci&oacute;n no encontrada.&quot;
 }</code>
  </pre>
     </span>
@@ -2718,23 +3016,23 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-evaluaciones--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-evaluaciones--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the evaluacione. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
                     </form>
 
                 <h1 id="gestion-de-exposiciones">Gestión de Exposiciones</h1>
 
-    <p>Endpoints para administrar exposiciones.</p>
+    
 
-                                <h2 id="gestion-de-exposiciones-GETapi-exposiciones">Listar todas las exposiciones programadas</h2>
+                                <h2 id="gestion-de-exposiciones-GETapi-exposiciones">Listar exposiciones.</h2>
 
 <p>
 </p>
@@ -2772,20 +3070,11 @@ fetch(url, {
 
 <span id="example-responses-GETapi-exposiciones">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: [...] }</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-exposiciones" hidden>
@@ -2861,7 +3150,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-exposiciones-POSTapi-exposiciones">Programar una nueva exposición</h2>
+                    <h2 id="gestion-de-exposiciones-POSTapi-exposiciones">Programar exposición.</h2>
 
 <p>
 </p>
@@ -2878,10 +3167,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_equipo\": \"consequatur\",
-    \"id_rubrica\": \"consequatur\",
-    \"tema\": \"mqeopfuudtdsufvyvddqa\",
-    \"fecha\": \"2026-03-07 04:53:41\"
+    \"id_equipo\": 1,
+    \"id_rubrica\": 1,
+    \"tema\": \"Inteligencia Artificial\",
+    \"fecha\": \"2024-06-15 10:00:00\"
 }"
 </code></pre></div>
 
@@ -2897,10 +3186,10 @@ const headers = {
 };
 
 let body = {
-    "id_equipo": "consequatur",
-    "id_rubrica": "consequatur",
-    "tema": "mqeopfuudtdsufvyvddqa",
-    "fecha": "2026-03-07 04:53:41"
+    "id_equipo": 1,
+    "id_rubrica": 1,
+    "tema": "Inteligencia Artificial",
+    "fecha": "2024-06-15 10:00:00"
 };
 
 fetch(url, {
@@ -2912,7 +3201,14 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-exposiciones">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...} }</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-exposiciones" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-exposiciones"></span>:
@@ -2987,27 +3283,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_equipo</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id_equipo"                data-endpoint="POSTapi-exposiciones"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_equipo"                data-endpoint="POSTapi-exposiciones"
+               value="1"
                data-component="body">
     <br>
-<p>The <code>id_equipo</code> of an existing record in the equipos table. Example: <code>consequatur</code></p>
+<p>ID Equipo. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_rubrica</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id_rubrica"                data-endpoint="POSTapi-exposiciones"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_rubrica"                data-endpoint="POSTapi-exposiciones"
+               value="1"
                data-component="body">
     <br>
-<p>The <code>id_rubrica</code> of an existing record in the rubricas table. Example: <code>consequatur</code></p>
+<p>ID Rúbrica. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>tema</code></b>&nbsp;&nbsp;
@@ -3016,10 +3312,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="tema"                data-endpoint="POSTapi-exposiciones"
-               value="mqeopfuudtdsufvyvddqa"
+               value="Inteligencia Artificial"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>mqeopfuudtdsufvyvddqa</code></p>
+<p>Tema. Example: <code>Inteligencia Artificial</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>fecha</code></b>&nbsp;&nbsp;
@@ -3028,15 +3324,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="fecha"                data-endpoint="POSTapi-exposiciones"
-               value="2026-03-07 04:53:41"
+               value="2024-06-15 10:00:00"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>Y-m-d H:i:s</code>. Example: <code>2026-03-07 04:53:41</code></p>
+<p>Formato Y-m-d H:i:s. Example: <code>2024-06-15 10:00:00</code></p>
         </div>
         </form>
 
-                    <h2 id="gestion-de-exposiciones-GETapi-exposiciones--id-">Ver detalles de una exposición (incluyendo criterios de su rúbrica)
-Útil para cuando el evaluador abre el formulario de calificación</h2>
+                    <h2 id="gestion-de-exposiciones-GETapi-exposiciones--id-">Ver exposición.</h2>
 
 <p>
 </p>
@@ -3049,14 +3344,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/exposiciones/consequatur" \
+    --get "http://localhost:8000/api/exposiciones/17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones/consequatur"
+    "http://localhost:8000/api/exposiciones/17"
 );
 
 const headers = {
@@ -3074,19 +3369,20 @@ fetch(url, {
 
 <span id="example-responses-GETapi-exposiciones--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...} }</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Exposici&oacute;n no encontrada.&quot;
 }</code>
  </pre>
     </span>
@@ -3164,19 +3460,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-exposiciones--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-exposiciones--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the exposicione. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-exposiciones-PUTapi-exposiciones--id-">Actualizar fecha o tema</h2>
+                    <h2 id="gestion-de-exposiciones-PUTapi-exposiciones--id-">Actualizar exposición.</h2>
 
 <p>
 </p>
@@ -3189,14 +3485,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/exposiciones/consequatur" \
+    "http://localhost:8000/api/exposiciones/17" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"tema\": \"consequatur\",
+    \"fecha\": \"consequatur\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones/consequatur"
+    "http://localhost:8000/api/exposiciones/17"
 );
 
 const headers = {
@@ -3204,16 +3505,38 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "tema": "consequatur",
+    "fecha": "consequatur"
+};
 
 fetch(url, {
     method: "PUT",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
 
 <span id="example-responses-PUTapi-exposiciones--id-">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...} }</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Exposici&oacute;n no encontrada.&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-exposiciones--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-exposiciones--id-"></span>:
@@ -3292,19 +3615,44 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-exposiciones--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-exposiciones--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the exposicione. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>tema</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="tema"                data-endpoint="PUTapi-exposiciones--id-"
+               value="consequatur"
+               data-component="body">
+    <br>
+<p>Example: <code>consequatur</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>fecha</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="fecha"                data-endpoint="PUTapi-exposiciones--id-"
+               value="consequatur"
+               data-component="body">
+    <br>
+<p>Example: <code>consequatur</code></p>
+        </div>
+        </form>
 
-                    <h2 id="gestion-de-exposiciones-DELETEapi-exposiciones--id-">Cancelar una exposición</h2>
+                    <h2 id="gestion-de-exposiciones-DELETEapi-exposiciones--id-">Eliminar exposición.</h2>
 
 <p>
 </p>
@@ -3317,14 +3665,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/exposiciones/consequatur" \
+    "http://localhost:8000/api/exposiciones/17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones/consequatur"
+    "http://localhost:8000/api/exposiciones/17"
 );
 
 const headers = {
@@ -3416,28 +3764,30 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-exposiciones--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-exposiciones--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the exposicione. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
                     </form>
 
                 <h1 id="gestion-de-grupos">Gestión de Grupos</h1>
 
-    <p>Endpoints para administrar Grupos de una materia.</p>
+    <p>Endpoints para administrar Grupos de una materia y la inscripción de alumnos.</p>
 
-                                <h2 id="gestion-de-grupos-GETapi-grupos">Listar todos los grupos con su materia y maestro</h2>
+                                <h2 id="gestion-de-grupos-GETapi-grupos">Listar todos los grupos.</h2>
 
 <p>
 </p>
 
-
+<ul>
+<li>Obtiene una lista de todos los grupos junto con la información de su materia y el maestro asignado.</li>
+</ul>
 
 <span id="example-requests-GETapi-grupos">
 <blockquote>Example request:</blockquote>
@@ -3470,19 +3820,31 @@ fetch(url, {
 
 <span id="example-responses-GETapi-grupos">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        {
+            &quot;id_grupo&quot;: 1,
+            &quot;id_materia&quot;: 5,
+            &quot;id_maestro&quot;: 2,
+            &quot;grupo&quot;: &quot;A&quot;,
+            &quot;materia&quot;: {
+                &quot;id_materia&quot;: 5,
+                &quot;materia&quot;: &quot;Programaci&oacute;n Web&quot;
+            },
+            &quot;maestro&quot;: {
+                &quot;id_usuario&quot;: 2,
+                &quot;usuario&quot;: {
+                    &quot;nombre&quot;: &quot;Prof. Garc&iacute;a&quot;
+                }
+            }
+        }
+    ],
+    &quot;message&quot;: &quot;Grupos recuperados con &eacute;xito.&quot;
 }</code>
  </pre>
     </span>
@@ -3559,7 +3921,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-grupos-POSTapi-grupos">Crear un nuevo grupo</h2>
+                    <h2 id="gestion-de-grupos-POSTapi-grupos">Crear un nuevo grupo.</h2>
 
 <p>
 </p>
@@ -3576,9 +3938,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_materia\": \"consequatur\",
-    \"id_maestro\": \"consequatur\",
-    \"grupo\": \"mqeopfuud\"
+    \"id_materia\": 1,
+    \"id_maestro\": 2,
+    \"grupo\": \"601-A\"
 }"
 </code></pre></div>
 
@@ -3594,9 +3956,9 @@ const headers = {
 };
 
 let body = {
-    "id_materia": "consequatur",
-    "id_maestro": "consequatur",
-    "grupo": "mqeopfuud"
+    "id_materia": 1,
+    "id_maestro": 2,
+    "grupo": "601-A"
 };
 
 fetch(url, {
@@ -3608,7 +3970,47 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-grupos">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id_grupo&quot;: 10,
+        &quot;id_materia&quot;: 1,
+        &quot;id_maestro&quot;: 2,
+        &quot;grupo&quot;: &quot;601-A&quot;,
+        &quot;materia&quot;: {
+            &quot;id_materia&quot;: 1,
+            &quot;materia&quot;: &quot;Matem&aacute;ticas&quot;
+        },
+        &quot;maestro&quot;: {
+            &quot;id_usuario&quot;: 2,
+            &quot;usuario&quot;: {
+                &quot;nombre&quot;: &quot;Prof. Garc&iacute;a&quot;
+            }
+        }
+    },
+    &quot;message&quot;: &quot;Grupo creado correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;id_materia&quot;: [
+            &quot;The selected id materia is invalid.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-grupos" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-grupos"></span>:
@@ -3683,27 +4085,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_materia</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id_materia"                data-endpoint="POSTapi-grupos"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_materia"                data-endpoint="POSTapi-grupos"
+               value="1"
                data-component="body">
     <br>
-<p>The <code>id_materia</code> of an existing record in the materias table. Example: <code>consequatur</code></p>
+<p>El ID de la materia. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_maestro</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id_maestro"                data-endpoint="POSTapi-grupos"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_maestro"                data-endpoint="POSTapi-grupos"
+               value="2"
                data-component="body">
     <br>
-<p>The <code>id_usuario</code> of an existing record in the maestros table. Example: <code>consequatur</code></p>
+<p>El ID del usuario que es maestro. Example: <code>2</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>grupo</code></b>&nbsp;&nbsp;
@@ -3712,19 +4114,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="grupo"                data-endpoint="POSTapi-grupos"
-               value="mqeopfuud"
+               value="601-A"
                data-component="body">
     <br>
-<p>Must not be greater than 10 characters. Example: <code>mqeopfuud</code></p>
+<p>El identificador del grupo (ej. A, B, 401). Max: 10 caracteres. Example: <code>601-A</code></p>
         </div>
         </form>
 
-                    <h2 id="gestion-de-grupos-GETapi-grupos--id-">Mostrar un grupo específico con sus alumnos inscritos</h2>
+                    <h2 id="gestion-de-grupos-GETapi-grupos--id-">Mostrar un grupo específico.</h2>
 
 <p>
 </p>
 
-
+<ul>
+<li>Retorna los detalles de un grupo incluyendo la lista de alumnos inscritos.</li>
+</ul>
 
 <span id="example-requests-GETapi-grupos--id-">
 <blockquote>Example request:</blockquote>
@@ -3732,14 +4136,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/grupos/consequatur" \
+    --get "http://localhost:8000/api/grupos/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos/consequatur"
+    "http://localhost:8000/api/grupos/1"
 );
 
 const headers = {
@@ -3757,19 +4161,36 @@ fetch(url, {
 
 <span id="example-responses-GETapi-grupos--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id_grupo&quot;: 1,
+        &quot;grupo&quot;: &quot;A&quot;,
+        &quot;alumnos&quot;: [
+            {
+                &quot;id_usuario&quot;: 10,
+                &quot;usuario&quot;: {
+                    &quot;nombre&quot;: &quot;Alumno Ejemplo&quot;
+                }
+            }
+        ]
+    },
+    &quot;message&quot;: &quot;Detalles del grupo obtenidos.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Grupo no encontrado.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -3847,19 +4268,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-grupos--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-grupos--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the grupo. Example: <code>consequatur</code></p>
+<p>El ID del grupo. Example: <code>1</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-grupos-DELETEapi-grupos--id-">Eliminar un grupo</h2>
+                    <h2 id="gestion-de-grupos-DELETEapi-grupos--id-">Eliminar un grupo.</h2>
 
 <p>
 </p>
@@ -3872,14 +4293,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/grupos/consequatur" \
+    "http://localhost:8000/api/grupos/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos/consequatur"
+    "http://localhost:8000/api/grupos/1"
 );
 
 const headers = {
@@ -3896,7 +4317,29 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-grupos--id-">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [],
+    &quot;message&quot;: &quot;Grupo eliminado exitosamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Grupo no encontrado.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-grupos--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-grupos--id-"></span>:
@@ -3971,25 +4414,26 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-grupos--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-grupos--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the grupo. Example: <code>consequatur</code></p>
+<p>El ID del grupo a eliminar. Example: <code>1</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-grupos-POSTapi-grupos--id--inscribir">Inscribir o actualizar la lista de alumnos del grupo
-Se espera un array de IDs de alumnos (id_usuario)</h2>
+                    <h2 id="gestion-de-grupos-POSTapi-grupos--id--inscribir">Inscribir alumnos al grupo.</h2>
 
 <p>
 </p>
 
-
+<ul>
+<li>Actualiza la lista de alumnos mediante el método sync (reemplaza la lista actual por la nueva).</li>
+</ul>
 
 <span id="example-requests-POSTapi-grupos--id--inscribir">
 <blockquote>Example request:</blockquote>
@@ -3997,15 +4441,22 @@ Se espera un array de IDs de alumnos (id_usuario)</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/grupos/consequatur/inscribir" \
+    "http://localhost:8000/api/grupos/1/inscribir" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
+    --data "{
+    \"alumnos\": [
+        10,
+        11,
+        12
+    ]
+}"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos/consequatur/inscribir"
+    "http://localhost:8000/api/grupos/1/inscribir"
 );
 
 const headers = {
@@ -4013,16 +4464,49 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "alumnos": [
+        10,
+        11,
+        12
+    ]
+};
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
 
 <span id="example-responses-POSTapi-grupos--id--inscribir">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+&quot;success&quot;: true,
+&quot;data&quot;: {
+&quot;id_grupo&quot;: 1,
+&quot;alumnos&quot;: [ { &quot;id_usuario&quot;: 10, &quot;usuario&quot;: {...} } ]
+},
+&quot;message&quot;: &quot;Lista de alumnos actualizada correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Grupo no encontrado.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-grupos--id--inscribir" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-grupos--id--inscribir"></span>:
@@ -4097,38 +4581,38 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="POSTapi-grupos--id--inscribir"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-grupos--id--inscribir"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the grupo. Example: <code>consequatur</code></p>
+<p>El ID del grupo. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>alumnos</code></b>&nbsp;&nbsp;
-<small>string[]</small>&nbsp;
-<i>optional</i> &nbsp;
+<small>integer[]</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="alumnos[0]"                data-endpoint="POSTapi-grupos--id--inscribir"
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="alumnos[0]"                data-endpoint="POSTapi-grupos--id--inscribir"
                data-component="body">
-        <input type="text" style="display: none"
+        <input type="number" style="display: none"
                name="alumnos[1]"                data-endpoint="POSTapi-grupos--id--inscribir"
                data-component="body">
     <br>
-<p>The <code>id_usuario</code> of an existing record in the alumnos table.</p>
+<p>Array con los IDs (id_usuario) de los alumnos a inscribir.</p>
         </div>
         </form>
 
                 <h1 id="gestion-de-maestros">Gestión de Maestros</h1>
 
-    <p>Endpoints para administrar maestros de la institución.</p>
+    
 
-                                <h2 id="gestion-de-maestros-GETapi-maestros">GET api/maestros</h2>
+                                <h2 id="gestion-de-maestros-GETapi-maestros">Listar maestros.</h2>
 
 <p>
 </p>
@@ -4166,20 +4650,11 @@ fetch(url, {
 
 <span id="example-responses-GETapi-maestros">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: [...] }</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-maestros" hidden>
@@ -4255,7 +4730,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-maestros-POSTapi-maestros">POST api/maestros</h2>
+                    <h2 id="gestion-de-maestros-POSTapi-maestros">Crear maestro.</h2>
 
 <p>
 </p>
@@ -4272,10 +4747,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"nombre\": \"vmqeopfuudtdsufvyvddq\",
-    \"email\": \"kunde.eloisa@example.com\",
-    \"password\": \"4[*UyPJ\\\"}6\",
-    \"id_rol\": \"consequatur\"
+    \"nombre\": \"Prof. Gabriel\",
+    \"email\": \"gabriel@docente.com\",
+    \"password\": \"secret123\",
+    \"id_rol\": 1
 }"
 </code></pre></div>
 
@@ -4291,10 +4766,10 @@ const headers = {
 };
 
 let body = {
-    "nombre": "vmqeopfuudtdsufvyvddq",
-    "email": "kunde.eloisa@example.com",
-    "password": "4[*UyPJ\"}6",
-    "id_rol": "consequatur"
+    "nombre": "Prof. Gabriel",
+    "email": "gabriel@docente.com",
+    "password": "secret123",
+    "id_rol": 1
 };
 
 fetch(url, {
@@ -4306,7 +4781,14 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-maestros">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...} }</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-maestros" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-maestros"></span>:
@@ -4382,54 +4864,54 @@ You can check the Dev Tools console for debugging information.</code></pre>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="nombre"                data-endpoint="POSTapi-maestros"
-               value="vmqeopfuudtdsufvyvddq"
+               value="Prof. Gabriel"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
+<p>required. Example: <code>Prof. Gabriel</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-maestros"
-               value="kunde.eloisa@example.com"
+               value="gabriel@docente.com"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>kunde.eloisa@example.com</code></p>
+<p>required. Example: <code>gabriel@docente.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-maestros"
-               value="4[*UyPJ"}6"
+               value="secret123"
                data-component="body">
     <br>
-<p>Must be at least 8 characters. Example: <code>4[*UyPJ"}6</code></p>
+<p>required. Example: <code>secret123</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_rol</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="id_rol"                data-endpoint="POSTapi-maestros"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id_rol"                data-endpoint="POSTapi-maestros"
+               value="1"
                data-component="body">
     <br>
-<p>The <code>id_rol</code> of an existing record in the roles table. Example: <code>consequatur</code></p>
+<p>required. Example: <code>1</code></p>
         </div>
         </form>
 
-                    <h2 id="gestion-de-maestros-GETapi-maestros--id-">GET api/maestros/{id}</h2>
+                    <h2 id="gestion-de-maestros-GETapi-maestros--id-">Ver maestro específico.</h2>
 
 <p>
 </p>
@@ -4442,14 +4924,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/maestros/consequatur" \
+    --get "http://localhost:8000/api/maestros/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros/consequatur"
+    "http://localhost:8000/api/maestros/1"
 );
 
 const headers = {
@@ -4557,19 +5039,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-maestros--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-maestros--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the maestro. Example: <code>consequatur</code></p>
+<p>ID de usuario del maestro. Example: <code>1</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-maestros-PUTapi-maestros--id-">PUT api/maestros/{id}</h2>
+                    <h2 id="gestion-de-maestros-PUTapi-maestros--id-">Actualizar maestro.</h2>
 
 <p>
 </p>
@@ -4582,14 +5064,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/maestros/consequatur" \
+    "http://localhost:8000/api/maestros/17" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"consequatur\",
+    \"email\": \"qkunze@example.com\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros/consequatur"
+    "http://localhost:8000/api/maestros/17"
 );
 
 const headers = {
@@ -4597,10 +5084,15 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "consequatur",
+    "email": "qkunze@example.com"
+};
 
 fetch(url, {
     method: "PUT",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -4685,19 +5177,44 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-maestros--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-maestros--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the maestro. Example: <code>consequatur</code></p>
+<p>ID de usuario. Example: <code>17</code></p>
             </div>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="PUTapi-maestros--id-"
+               value="consequatur"
+               data-component="body">
+    <br>
+<p>Example: <code>consequatur</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="PUTapi-maestros--id-"
+               value="qkunze@example.com"
+               data-component="body">
+    <br>
+<p>Example: <code>qkunze@example.com</code></p>
+        </div>
+        </form>
 
-                    <h2 id="gestion-de-maestros-DELETEapi-maestros--id-">DELETE api/maestros/{id}</h2>
+                    <h2 id="gestion-de-maestros-DELETEapi-maestros--id-">Eliminar maestro.</h2>
 
 <p>
 </p>
@@ -4710,14 +5227,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/maestros/consequatur" \
+    "http://localhost:8000/api/maestros/17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros/consequatur"
+    "http://localhost:8000/api/maestros/17"
 );
 
 const headers = {
@@ -4809,15 +5326,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-maestros--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-maestros--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the maestro. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
                     </form>
 
@@ -4825,7 +5342,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
     <p>Endpoints para la gestión del catálogo de materias de la institución.</p>
 
-                                <h2 id="gestion-de-materias-GETapi-materias">Listar todos los grupos con su materia y maestro</h2>
+                                <h2 id="gestion-de-materias-GETapi-materias">Listar todas las materias.</h2>
 
 <p>
 </p>
@@ -4863,19 +5380,23 @@ fetch(url, {
 
 <span id="example-responses-GETapi-materias">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        {
+            &quot;id_materia&quot;: 1,
+            &quot;materia&quot;: &quot;C&aacute;lculo Diferencial&quot;
+        },
+        {
+            &quot;id_materia&quot;: 2,
+            &quot;materia&quot;: &quot;F&iacute;sica&quot;
+        }
+    ],
+    &quot;message&quot;: &quot;Materias recuperadas con &eacute;xito.&quot;
 }</code>
  </pre>
     </span>
@@ -4952,7 +5473,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-materias-POSTapi-materias">POST api/materias</h2>
+                    <h2 id="gestion-de-materias-POSTapi-materias">Crear una nueva materia.</h2>
 
 <p>
 </p>
@@ -4969,7 +5490,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"materia\": \"consequatur\"
+    \"materia\": \"Inteligencia Artificial\"
 }"
 </code></pre></div>
 
@@ -4985,7 +5506,7 @@ const headers = {
 };
 
 let body = {
-    "materia": "consequatur"
+    "materia": "Inteligencia Artificial"
 };
 
 fetch(url, {
@@ -4997,7 +5518,35 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-materias">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id_materia&quot;: 15,
+        &quot;materia&quot;: &quot;Inteligencia Artificial&quot;
+    },
+    &quot;message&quot;: &quot;Materia creado correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;materia&quot;: [
+            &quot;The materia field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-materias" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-materias"></span>:
@@ -5077,14 +5626,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="materia"                data-endpoint="POSTapi-materias"
-               value="consequatur"
+               value="Inteligencia Artificial"
                data-component="body">
     <br>
-<p>Example: <code>consequatur</code></p>
+<p>Nombre de la materia. Example: <code>Inteligencia Artificial</code></p>
         </div>
         </form>
 
-                    <h2 id="gestion-de-materias-GETapi-materias--id-">Mostrar un grupo específico con sus alumnos inscritos</h2>
+                    <h2 id="gestion-de-materias-GETapi-materias--id-">Mostrar una materia específica.</h2>
 
 <p>
 </p>
@@ -5097,14 +5646,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/materias/consequatur" \
+    --get "http://localhost:8000/api/materias/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/materias/consequatur"
+    "http://localhost:8000/api/materias/1"
 );
 
 const headers = {
@@ -5122,19 +5671,28 @@ fetch(url, {
 
 <span id="example-responses-GETapi-materias--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id_materia&quot;: 1,
+        &quot;materia&quot;: &quot;C&aacute;lculo Diferencial&quot;
+    },
+    &quot;message&quot;: &quot;Detalles de las materias obtenidos.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Materia no encontrada.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -5212,19 +5770,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-materias--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-materias--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the materia. Example: <code>consequatur</code></p>
+<p>El ID de la materia. Example: <code>1</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-materias-DELETEapi-materias--id-">DELETE api/materias/{id}</h2>
+                    <h2 id="gestion-de-materias-DELETEapi-materias--id-">Eliminar una materia.</h2>
 
 <p>
 </p>
@@ -5237,14 +5795,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/materias/consequatur" \
+    "http://localhost:8000/api/materias/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/materias/consequatur"
+    "http://localhost:8000/api/materias/1"
 );
 
 const headers = {
@@ -5261,7 +5819,29 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-materias--id-">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [],
+    &quot;message&quot;: &quot;Materia eliminada exitosamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Materia no encontrada.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-materias--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-materias--id-"></span>:
@@ -5336,23 +5916,23 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-materias--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-materias--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the materia. Example: <code>consequatur</code></p>
+<p>El ID de la materia a eliminar. Example: <code>1</code></p>
             </div>
                     </form>
 
                 <h1 id="gestion-de-rubricas">Gestión de Rubricas</h1>
 
-    <p>Endpoints para administrar rubricas de exposiciones.</p>
+    
 
-                                <h2 id="gestion-de-rubricas-GETapi-rubricas">Listar todas las rúbricas con sus criterios</h2>
+                                <h2 id="gestion-de-rubricas-GETapi-rubricas">Listar rúbricas.</h2>
 
 <p>
 </p>
@@ -5390,20 +5970,11 @@ fetch(url, {
 
 <span id="example-responses-GETapi-rubricas">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: [...] }</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-rubricas" hidden>
@@ -5479,7 +6050,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="gestion-de-rubricas-POSTapi-rubricas">Crear una rúbrica junto con sus criterios (Todo en uno)</h2>
+                    <h2 id="gestion-de-rubricas-POSTapi-rubricas">Crear rúbrica con criterios.</h2>
 
 <p>
 </p>
@@ -5496,11 +6067,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"rubrica\": \"vmqeopfuudtdsufvyvddq\",
+    \"rubrica\": \"Rubrica Final\",
     \"criterios\": [
         {
-            \"descripcion\": \"consequatur\",
-            \"porcentaje\": 13
+            \"descripcion\": \"Dominio del tema\",
+            \"porcentaje\": 30
         }
     ]
 }"
@@ -5518,11 +6089,11 @@ const headers = {
 };
 
 let body = {
-    "rubrica": "vmqeopfuudtdsufvyvddq",
+    "rubrica": "Rubrica Final",
     "criterios": [
         {
-            "descripcion": "consequatur",
-            "porcentaje": 13
+            "descripcion": "Dominio del tema",
+            "porcentaje": 30
         }
     ]
 };
@@ -5536,7 +6107,14 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-rubricas">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...} }</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-rubricas" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-rubricas"></span>:
@@ -5616,10 +6194,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="rubrica"                data-endpoint="POSTapi-rubricas"
-               value="vmqeopfuudtdsufvyvddq"
+               value="Rubrica Final"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
+<p>Nombre. Example: <code>Rubrica Final</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -5629,19 +6207,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
 <br>
-<p>Must have at least 1 items.</p>
+
             </summary>
                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>descripcion</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="criterios.0.descripcion"                data-endpoint="POSTapi-rubricas"
-               value="consequatur"
+               value="Dominio del tema"
                data-component="body">
     <br>
-<p>Example: <code>consequatur</code></p>
+<p>required. Example: <code>Dominio del tema</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>porcentaje</code></b>&nbsp;&nbsp;
@@ -5650,16 +6228,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="criterios.0.porcentaje"                data-endpoint="POSTapi-rubricas"
-               value="13"
+               value="30"
                data-component="body">
     <br>
-<p>Must be at least 1. Must not be greater than 100. Example: <code>13</code></p>
+<p>(1-100). Example: <code>30</code></p>
                     </div>
                                     </details>
         </div>
         </form>
 
-                    <h2 id="gestion-de-rubricas-GETapi-rubricas--id-">Mostrar una rúbrica específica</h2>
+                    <h2 id="gestion-de-rubricas-GETapi-rubricas--id-">Ver rúbrica.</h2>
 
 <p>
 </p>
@@ -5672,14 +6250,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/rubricas/consequatur" \
+    --get "http://localhost:8000/api/rubricas/17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/rubricas/consequatur"
+    "http://localhost:8000/api/rubricas/17"
 );
 
 const headers = {
@@ -5787,19 +6365,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-rubricas--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-rubricas--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the rubrica. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
                     </form>
 
-                    <h2 id="gestion-de-rubricas-DELETEapi-rubricas--id-">Eliminar rúbrica (Borrará criterios por cascada)</h2>
+                    <h2 id="gestion-de-rubricas-DELETEapi-rubricas--id-">Eliminar rúbrica.</h2>
 
 <p>
 </p>
@@ -5812,14 +6390,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/rubricas/consequatur" \
+    "http://localhost:8000/api/rubricas/17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/rubricas/consequatur"
+    "http://localhost:8000/api/rubricas/17"
 );
 
 const headers = {
@@ -5911,15 +6489,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-rubricas--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-rubricas--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the rubrica. Example: <code>consequatur</code></p>
+<p>Example: <code>17</code></p>
             </div>
                     </form>
 
