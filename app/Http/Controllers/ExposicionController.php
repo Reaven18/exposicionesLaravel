@@ -7,12 +7,31 @@ use Illuminate\Http\Request;
 
 /**
  * @group Gestión de Exposiciones
+ *
+ * Endpoints para programar, actualizar y consultar las exposiciones de los equipos.
  */
 class ExposicionController extends Controller
 {
     /**
      * Listar exposiciones.
-     * @response 200 { "success": true, "data": [...] }
+     * @authenticated
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * {
+     * "id_expo": 1,
+     * "tema": "Seguridad en Redes",
+     * "fecha": "2026-05-20 09:00:00",
+     * "equipo": {
+     * "id_equipo": 3,
+     * "equipo": "CyberSec Team",
+     * "grupo": { "materia": { "nombre_materia": "Seguridad Informática" } }
+     * },
+     * "rubrica": { "id_rubrica": 1, "nombre": "Rúbrica General" }
+     * }
+     * ],
+     * "message": "Exposiciones recuperadas."
+     * }
      */
     public function index()
     {
@@ -22,11 +41,22 @@ class ExposicionController extends Controller
 
     /**
      * Programar exposición.
-     * @bodyParam id_equipo integer required ID Equipo. Example: 1
-     * @bodyParam id_rubrica integer required ID Rúbrica. Example: 1
-     * @bodyParam tema string required Tema. Example: Inteligencia Artificial
-     * @bodyParam fecha string required Formato Y-m-d H:i:s. Example: 2024-06-15 10:00:00
-     * @response 201 { "success": true, "data": {...} }
+     * @authenticated
+     * @bodyParam id_equipo integer required ID del equipo asignado. Example: 1
+     * @bodyParam id_rubrica integer required ID de la rúbrica a aplicar. Example: 1
+     * @bodyParam tema string required Título de la exposición. Example: Inteligencia Artificial
+     * @bodyParam fecha string required Formato Y-m-d H:i:s. Example: 2026-06-15 10:00:00
+     * @response 201 {
+     * "success": true,
+     * "data": {
+     * "id_expo": 12,
+     * "tema": "Inteligencia Artificial",
+     * "equipo": { "equipo": "Los Dinamita" },
+     * "rubrica": { "nombre": "Rúbrica Proyectos" }
+     * },
+     * "message": "Exposición programada correctamente."
+     * }
+     * @response 422 { "message": "The fecha field is required.", "errors": { "fecha": ["..."] } }
      */
     public function store(Request $request)
     {
@@ -43,9 +73,21 @@ class ExposicionController extends Controller
 
     /**
      * Ver exposición.
-     * @urlParam id integer required
-     * @response 200 { "success": true, "data": {...} }
-     * @response 404 { "success": false, "message": "Exposición no encontrada." }
+     * * Obtiene información exhaustiva: integrantes del equipo, criterios de evaluación y evaluaciones recibidas.
+     * @authenticated
+     * @urlParam id integer required ID de la exposición.
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_expo": 1,
+     * "tema": "IA",
+     * "equipo": { "integrantes": [...] },
+     * "rubrica": { "criterios": [...] },
+     * "evaluaciones": [ { "usuario": { "nombre": "Juan" }, "observaciones": "..." } ]
+     * },
+     * "message": "Detalles de la exposición cargados."
+     * }
+     * @response 404 { "success": false, "message": "Exposición no encontrada.", "data": [] }
      */
     public function show($id)
     {
@@ -56,11 +98,11 @@ class ExposicionController extends Controller
 
     /**
      * Actualizar exposición.
+     * @authenticated
      * @urlParam id integer required
-     * @bodyParam tema string
-     * @bodyParam fecha string
-     * @response 200 { "success": true, "data": {...} }
-     * @response 404 { "success": false, "message": "Exposición no encontrada." }
+     * @bodyParam tema string Nuevo tema. Example: IA Generativa
+     * @bodyParam fecha string Nueva fecha. Example: 2026-07-01 11:00:00
+     * @response 200 { "success": true, "data": { "id_expo": 1, "tema": "IA Generativa" }, "message": "Exposición actualizada." }
      */
     public function update(Request $request, $id)
     {
@@ -73,7 +115,9 @@ class ExposicionController extends Controller
 
     /**
      * Eliminar exposición.
+     * @authenticated
      * @urlParam id integer required
+     * @response 200 { "success": true, "data": [], "message": "Exposición eliminada." }
      */
     public function destroy($id)
     {

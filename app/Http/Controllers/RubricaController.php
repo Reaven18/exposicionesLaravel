@@ -7,13 +7,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @group Gestión de Rubricas
+ * @group Gestión de Rúbricas
+ *
+ * Endpoints para definir las rúbricas de evaluación y sus criterios (porcentajes) correspondientes.
  */
 class RubricaController extends Controller
 {
     /**
      * Listar rúbricas.
-     * @response 200 { "success": true, "data": [...] }
+     * @authenticated
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * {
+     * "id_rubrica": 1,
+     * "rubrica": "Rúbrica Final Proyectos",
+     * "criterios": [
+     * { "id_criterios": 1, "descripcion": "Dominio del tema", "porcentaje": 40 }
+     * ]
+     * }
+     * ],
+     * "message": "Rúbricas recuperadas."
+     * }
      */
     public function index()
     {
@@ -23,11 +38,27 @@ class RubricaController extends Controller
 
     /**
      * Crear rúbrica con criterios.
-     * @bodyParam rubrica string required Nombre. Example: Rubrica Final
-     * @bodyParam criterios object[] required
-     * @bodyParam criterios[].descripcion string required. Example: Dominio del tema
-     * @bodyParam criterios[].porcentaje number required (1-100). Example: 30
-     * @response 201 { "success": true, "data": {...} }
+     * * Crea una rúbrica y asocia múltiples criterios de evaluación de forma atómica.
+     * @authenticated
+     * @bodyParam rubrica string required Nombre descriptivo de la rúbrica. Example: Rubrica Final
+     * @bodyParam criterios object[] required Lista de criterios que componen la rúbrica.
+     * @bodyParam criterios[].descripcion string required Descripción del criterio. Example: Dominio del tema
+     * @bodyParam criterios[].porcentaje number required Valor porcentual (1-100). Example: 30
+     * @response 201 {
+     * "success": true,
+     * "data": {
+     * "id_rubrica": 3,
+     * "rubrica": "Rubrica Final",
+     * "criterios": [
+     * { "descripcion": "Dominio del tema", "porcentaje": 30 }
+     * ]
+     * },
+     * "message": "Rúbrica y criterios creados con éxito."
+     * }
+     * @response 422 {
+     * "message": "The criterios.0.porcentaje must not be greater than 100.",
+     * "errors": { "criterios.0.porcentaje": ["..."] }
+     * }
      */
     public function store(Request $request)
     {
@@ -54,7 +85,18 @@ class RubricaController extends Controller
 
     /**
      * Ver rúbrica.
-     * @urlParam id integer required
+     * @authenticated
+     * @urlParam id integer required ID de la rúbrica. Example: 1
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_rubrica": 1,
+     * "rubrica": "Rúbrica Final",
+     * "criterios": [...]
+     * },
+     * "message": "Detalles de la rúbrica obtenidos."
+     * }
+     * @response 404 { "success": false, "message": "Rúbrica no encontrada.", "data": [] }
      */
     public function show($id)
     {
@@ -65,7 +107,9 @@ class RubricaController extends Controller
 
     /**
      * Eliminar rúbrica.
-     * @urlParam id integer required
+     * @authenticated
+     * @urlParam id integer required ID de la rúbrica.
+     * @response 200 { "success": true, "data": [], "message": "Rúbrica eliminada correctamente." }
      */
     public function destroy($id)
     {

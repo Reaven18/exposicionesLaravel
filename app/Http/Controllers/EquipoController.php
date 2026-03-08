@@ -8,12 +8,48 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group Gestión de Equipos
+ *
+ * Endpoints para administrar los equipos de trabajo, sus integrantes y su relación con las materias.
  */
 class EquipoController extends Controller
 {
     /**
      * Listar equipos.
-     * @response 200 { "success": true, "data": [...], "message": "Equipos recuperados exitosamente." }
+     * * Obtiene una lista de todos los equipos con su materia e integrantes.
+     * @authenticated
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * {
+     * "id_equipo": 1,
+     * "id_grupo": 2,
+     * "equipo": "Los Dinamita",
+     * "active": 1,
+     * "created_at": "2026-03-08T10:00:00.000000Z",
+     * "updated_at": "2026-03-08T10:00:00.000000Z",
+     * "grupo": {
+     * "id_grupo": 2,
+     * "id_materia": 5,
+     * "materia": {
+     * "id_materia": 5,
+     * "nombre_materia": "Programación Web"
+     * }
+     * },
+     * "integrantes": [
+     * {
+     * "id_usuario": 10,
+     * "nombre": "Juan Pérez",
+     * "email": "juan@example.com",
+     * "usuario": {
+     * "id_usuario": 10,
+     * "nombre": "Juan Pérez"
+     * }
+     * }
+     * ]
+     * }
+     * ],
+     * "message": "Equipos recuperados exitosamente."
+     * @response 401 { "message": "Unauthenticated." }
      */
     public function index()
     {
@@ -23,11 +59,39 @@ class EquipoController extends Controller
 
     /**
      * Crear un equipo.
-     * @bodyParam id_grupo integer required ID del grupo. Example: 1
-     * @bodyParam equipo string required Nombre del equipo. Example: Los Dinamita
-     * @bodyParam alumnos int[] required IDs de los alumnos (id_usuario). Example: [1, 2, 3]
-     * @response 201 { "success": true, "data": {...}, "message": "Equipo creado e integrantes asignados." }
-     * @response 500 { "success": false, "message": "Error al crear el equipo.", "data": ["..."] }
+     * * Crea un nuevo equipo y asigna los alumnos integrantes mediante una transacción.
+     * @authenticated
+     * @bodyParam id_grupo integer required ID del grupo al que pertenece. Example: 1
+     * @bodyParam equipo string required Nombre identificador del equipo. Example: Los Dinamita
+     * @bodyParam alumnos int[] required Array de IDs de usuarios (alumnos). Example: [10, 11, 12]
+     * @response 201 {
+     * "success": true,
+     * "data": {
+     * "id_equipo": 5,
+     * "id_grupo": 1,
+     * "equipo": "Los Dinamita",
+     * "active": true,
+     * "created_at": "2026-03-08T12:00:00.000000Z",
+     * "updated_at": "2026-03-08T12:00:00.000000Z",
+     * "integrantes": [
+     * { "id_usuario": 10, "nombre": "Juan Pérez" },
+     * { "id_usuario": 11, "nombre": "Maria Lopez" }
+     * ]
+     * },
+     * "message": "Equipo creado e integrantes asignados."
+     * }
+     * @response 422 {
+     * "message": "The alumnos field is required.",
+     * "errors": {
+     * "alumnos": ["The alumnos field is required."],
+     * "id_grupo": ["The selected id grupo is invalid."]
+     * }
+     * }
+     * @response 500 {
+     * "success": false,
+     * "message": "Error al crear el equipo.",
+     * "data": ["SQLSTATE[23000]: Integrity constraint violation..."]
+     * }
      */
     public function store(Request $request)
     {
@@ -56,43 +120,109 @@ class EquipoController extends Controller
 
     /**
      * Ver un equipo específico.
+     * * Muestra la información detallada de un equipo, incluyendo sus integrantes y exposiciones programadas.
+     * @authenticated
      * @urlParam id integer required ID del equipo. Example: 1
-     * @response 200 { "success": true, "data": {...}, "message": "Detalles del equipo recuperados." }
-     * @response 404 { "success": false, "message": "Equipo no encontrado.", "data": [] }
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_equipo": 1,
+     * "equipo": "Los Dinamita",
+     * "grupo": { "id_grupo": 1, "materia": { "nombre_materia": "Base de Datos" } },
+     * "integrantes": [
+     * { "id_usuario": 10, "nombre": "Juan Pérez" },
+     * { "id_usuario": 11, "nombre": "Maria Lopez" }
+     * ],
+     * "exposiciones": [
+     * { "id_exposicion": 1, "fecha": "2026-04-10", "tema": "Normalización" }
+     * ]
+     * },
+     * "message": "Detalles del equipo recuperados."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Equipo no encontrado.",
+     * "data": { "error": "El ID proporcionado no existe en la base de datos." }
+     * }
      */
     public function show($id)
     {
         $equipo = Equipo::with(['grupo.materia', 'integrantes.usuario', 'exposiciones'])->find($id);
-        if (!$equipo) return $this->sendError('Equipo no encontrado.', [], 404);
+        if (!$equipo) {
+            return $this->sendError('Equipo no encontrado.', ['error' => 'El ID proporcionado no existe en la base de datos.'], 404);
+        }
         return $this->sendResponse($equipo, 'Detalles del equipo recuperados.');
     }
 
     /**
      * Actualizar integrantes.
-     * @urlParam id integer required ID del equipo.
-     * @bodyParam alumnos int[] required Nuevos IDs de alumnos. Example: [4, 5]
-     * @response 200 { "success": true, "data": {...}, "message": "Integrantes actualizados." }
-     * @response 404 { "success": false, "message": "Equipo no encontrado.", "data": [] }
+     * * Reemplaza la lista actual de integrantes del equipo por una nueva lista de IDs de alumnos.
+     * @authenticated
+     * @urlParam id integer required ID del equipo a actualizar. Example: 1
+     * @bodyParam alumnos int[] required Nuevos IDs de alumnos integrantes. Example: [14, 15]
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_equipo": 1,
+     * "equipo": "Los Dinamita",
+     * "integrantes": [
+     * { "id_usuario": 14, "nombre": "Kevin Flynn" },
+     * { "id_usuario": 15, "nombre": "Alan Bradley" }
+     * ]
+     * },
+     * "message": "Integrantes actualizados exitosamente."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Equipo no encontrado.",
+     * "data": []
+     * }
+     * @response 422 {
+     * "message": "The alumnos.0 field is invalid.",
+     * "errors": {
+     * "alumnos.0": ["The selected alumnos.0 is invalid."]
+     * }
+     * }
      */
     public function updateIntegrantes(Request $request, $id)
     {
-        $request->validate(['alumnos' => 'required|array', 'alumnos.*' => 'exists:alumnos,id_usuario']);
+        $request->validate([
+            'alumnos' => 'required|array', 
+            'alumnos.*' => 'exists:alumnos,id_usuario'
+        ]);
+
         $equipo = Equipo::find($id);
-        if (!$equipo) return $this->sendError('Equipo no encontrado.', [], 404);
+        if (!$equipo) {
+            return $this->sendError('Equipo no encontrado.', [], 404);
+        }
 
         $equipo->integrantes()->sync($request->alumnos);
-        return $this->sendResponse($equipo->load('integrantes.usuario'), 'Integrantes actualizados.');
+        return $this->sendResponse($equipo->load('integrantes.usuario'), 'Integrantes actualizados exitosamente.');
     }
 
     /**
      * Eliminar equipo.
-     * @urlParam id integer required
-     * @response 200 { "success": true, "message": "Equipo eliminado correctamente." }
+     * * Elimina permanentemente el equipo del sistema.
+     * @authenticated
+     * @urlParam id integer required ID del equipo a eliminar. Example: 1
+     * @response 200 {
+     * "success": true,
+     * "data": [],
+     * "message": "Equipo eliminado correctamente."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Equipo no encontrado.",
+     * "data": []
+     * }
      */
     public function destroy($id)
     {
         $equipo = Equipo::find($id);
-        if (!$equipo) return $this->sendError('Equipo no encontrado.', [], 404);
+        if (!$equipo) {
+            return $this->sendError('Equipo no encontrado.', [], 404);
+        }
+        
         $equipo->delete();
         return $this->sendResponse([], 'Equipo eliminado correctamente.');
     }

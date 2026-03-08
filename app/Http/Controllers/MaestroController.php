@@ -10,12 +10,32 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * @group Gestión de Maestros
+ *
+ * Endpoints para la administración de docentes, incluyendo la creación de su cuenta de usuario vinculada.
  */
 class MaestroController extends Controller
 {
     /**
      * Listar maestros.
-     * @response 200 { "success": true, "data": [...] }
+     * * Recupera la lista de maestros con su información básica de usuario.
+     * @authenticated
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * {
+     * "id_usuario": 1,
+     * "created_at": "2026-03-08T00:00:00.000000Z",
+     * "updated_at": "2026-03-08T00:00:00.000000Z",
+     * "usuario": {
+     * "id_usuario": 1,
+     * "nombre": "Prof. Gabriel",
+     * "email": "gabriel@docente.com",
+     * "id_rol": 1
+     * }
+     * }
+     * ],
+     * "message": "Lista de maestros recuperada."
+     * }
      */
     public function index()
     {
@@ -25,11 +45,33 @@ class MaestroController extends Controller
 
     /**
      * Crear maestro.
-     * @bodyParam nombre string required. Example: Prof. Gabriel
-     * @bodyParam email string required. Example: gabriel@docente.com
-     * @bodyParam password string required. Example: secret123
-     * @bodyParam id_rol integer required. Example: 1
-     * @response 201 { "success": true, "data": {...} }
+     * * Crea un usuario y lo vincula automáticamente como maestro en una sola transacción.
+     * @authenticated
+     * @bodyParam nombre string required Nombre completo del docente. Example: Prof. Gabriel
+     * @bodyParam email string required Correo institucional único. Example: gabriel@docente.com
+     * @bodyParam password string required Contraseña (mín. 8 caracteres). Example: secret123
+     * @bodyParam id_rol integer required ID del rol de maestro. Example: 1
+     * @response 201 {
+     * "success": true,
+     * "data": {
+     * "id_usuario": 5,
+     * "usuario": {
+     * "id_usuario": 5,
+     * "nombre": "Prof. Gabriel",
+     * "email": "gabriel@docente.com"
+     * }
+     * },
+     * "message": "Maestro creado con éxito."
+     * }
+     * @response 422 {
+     * "message": "The email has already been taken.",
+     * "errors": { "email": ["The email has already been taken."] }
+     * }
+     * @response 500 {
+     * "success": false,
+     * "message": "Error al registrar maestro.",
+     * "data": ["Detalle técnico del error..."]
+     * }
      */
     public function store(Request $request)
     {
@@ -58,7 +100,21 @@ class MaestroController extends Controller
 
     /**
      * Ver maestro específico.
+     * * Obtiene el perfil del maestro junto con sus grupos y materias asignadas.
+     * @authenticated
      * @urlParam id integer required ID de usuario del maestro. Example: 1
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_usuario": 1,
+     * "usuario": { "nombre": "Prof. Gabriel", "email": "gabriel@docente.com" },
+     * "grupos": [
+     * { "id_grupo": 10, "materia": { "nombre_materia": "Ciberseguridad" } }
+     * ]
+     * },
+     * "message": "Detalles del maestro recuperados."
+     * }
+     * @response 404 { "success": false, "message": "Maestro no encontrado.", "data": [] }
      */
     public function show($id)
     {
@@ -69,9 +125,16 @@ class MaestroController extends Controller
 
     /**
      * Actualizar maestro.
+     * * Actualiza la información básica del usuario (nombre/email) vinculado al maestro.
+     * @authenticated
      * @urlParam id integer required ID de usuario.
-     * @bodyParam nombre string
-     * @bodyParam email string
+     * @bodyParam nombre string Nuevo nombre. Example: Gabriel actualizado
+     * @bodyParam email string Nuevo correo. Example: g.nuevo@docente.com
+     * @response 200 {
+     * "success": true,
+     * "data": { "id_usuario": 1, "nombre": "Gabriel actualizado", "maestro": {...} },
+     * "message": "Datos actualizados."
+     * }
      */
     public function update(Request $request, $id)
     {
@@ -83,7 +146,9 @@ class MaestroController extends Controller
 
     /**
      * Eliminar maestro.
-     * @urlParam id integer required
+     * @authenticated
+     * @urlParam id integer required ID del usuario a eliminar.
+     * @response 200 { "success": true, "data": [], "message": "Maestro eliminado correctamente." }
      */
     public function destroy($id)
     {

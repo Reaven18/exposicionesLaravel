@@ -8,12 +8,37 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group Gestión de Evaluaciones
+ *
+ * Endpoints para registrar y consultar las evaluaciones realizadas por los usuarios a las exposiciones.
  */
 class EvaluacionController extends Controller
 {
     /**
      * Listar evaluaciones.
-     * @response 200 { "success": true, "data": [...], "message": "Evaluaciones recuperadas." }
+     * * Recupera el historial completo de evaluaciones con sus detalles técnicos.
+     * @authenticated
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * {
+     * "id_evaluacion": 1,
+     * "id_expo": 5,
+     * "id_usuario": 2,
+     * "observaciones": "Excelente dominio del tema.",
+     * "fecha": "2026-03-08 10:00:00",
+     * "exposicion": { "id_expo": 5, "tema": "Arquitectura de Microservicios" },
+     * "usuario": { "id_usuario": 2, "nombre": "Dr. Arjona" },
+     * "detalles": [
+     * {
+     * "id_detalle": 1,
+     * "calificacion": 9.5,
+     * "criterio": { "id_criterios": 1, "nombre_criterio": "Puntualidad" }
+     * }
+     * ]
+     * }
+     * ],
+     * "message": "Evaluaciones recuperadas."
+     * }
      */
     public function index()
     {
@@ -23,13 +48,35 @@ class EvaluacionController extends Controller
 
     /**
      * Guardar evaluación.
-     * @bodyParam id_expo integer required ID exposición. Example: 1
+     * * Registra una nueva evaluación y sus calificaciones individuales por criterio dentro de una transacción.
+     * @authenticated
+     * @bodyParam id_expo integer required ID de la exposición a evaluar. Example: 1
      * @bodyParam id_usuario integer required ID del evaluador. Example: 1
-     * @bodyParam observaciones string Notas opcionales. Example: Muy buena dicción.
-     * @bodyParam calificaciones object[] required Array de calificaciones.
+     * @bodyParam observaciones string Notas u observaciones adicionales. Example: Muy buena dicción.
+     * @bodyParam calificaciones object[] required Array de calificaciones por criterio.
      * @bodyParam calificaciones[].id_criterio integer required ID del criterio. Example: 1
-     * @bodyParam calificaciones[].nota number required Nota (0-10). Example: 9.5
-     * * @response 201 { "success": true, "data": {...}, "message": "Evaluación registrada correctamente." }
+     * @bodyParam calificaciones[].nota number required Nota numérica (0-10). Example: 9.5
+     * @response 201 {
+     * "success": true,
+     * "data": {
+     * "id_evaluacion": 10,
+     * "id_expo": 1,
+     * "observaciones": "Muy buena dicción.",
+     * "detalles": [
+     * { "id_criterios": 1, "calificacion": 9.5, "criterio": { "nombre_criterio": "Dominio" } }
+     * ]
+     * },
+     * "message": "Evaluación registrada correctamente."
+     * }
+     * @response 422 {
+     * "message": "The calificaciones.0.nota must be a number.",
+     * "errors": { "calificaciones.0.nota": ["The calificaciones.0.nota must be a number."] }
+     * }
+     * @response 500 {
+     * "success": false,
+     * "message": "Error al registrar evaluación.",
+     * "data": ["Error de integridad en la base de datos..."]
+     * }
      */
     public function store(Request $request)
     {
@@ -39,7 +86,7 @@ class EvaluacionController extends Controller
             'observaciones'=> 'nullable|string',
             'calificaciones' => 'required|array',
             'calificaciones.*.id_criterio' => 'required|exists:criterios,id_criterios',
-            'calificaciones.*.nota'        => 'required|numeric|min:0|max:10'
+            'calificaciones.*.nota'         => 'required|numeric|min:0|max:10'
         ]);
 
         try {
@@ -67,9 +114,24 @@ class EvaluacionController extends Controller
 
     /**
      * Ver evaluación específica.
-     * @urlParam id integer required
-     * @response 200 { "success": true, "data": {...} }
-     * @response 404 { "success": false, "message": "Evaluación no encontrada." }
+     *@authenticated
+     * @urlParam id integer required ID de la evaluación. Example: 1
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_evaluacion": 1,
+     * "exposicion": { "tema": "IA", "equipo": { "equipo": "Los Linces" } },
+     * "detalles": [{
+     *           "id_criterios": 1,
+     *           "calificacion": 9.5,
+     *           "criterio": {
+     *               "nombre_criterio": "Dominio"
+     *           }
+     *       }]
+     * },
+     * "message": "Detalle de evaluación obtenido."
+     * }
+     * @response 404 { "success": false, "message": "Evaluación no encontrada.", "data": [] }
      */
     public function show($id)
     {
@@ -77,4 +139,42 @@ class EvaluacionController extends Controller
         if (!$evaluacion) return $this->sendError('Evaluación no encontrada.', [], 404);
         return $this->sendResponse($evaluacion, 'Detalle de evaluación obtenido.');
     }
+
+    /**
+     * Eliminar evaluación.
+     * * Elimina una evaluación específica del sistema. Si la base de datos tiene configurado ON DELETE CASCADE, también se eliminarán sus detalles de calificación.
+     * @authenticated
+     * @urlParam id integer required ID de la evaluación a eliminar. Example: 1
+     * @response 200 {
+     * "success": true,
+     * "data": [],
+     * "message": "Evaluación eliminada correctamente."
+     * }
+     * @response 404 {
+     * "success": false,
+     * "message": "Evaluación no encontrada.",
+     * "data": []
+     * }
+     * @response 500 {
+     * "success": false,
+     * "message": "Error al eliminar la evaluación.",
+     * "data": ["Detalle del error SQL..."]
+     * }
+     */
+    public function destroy($id)
+    {
+        $evaluacion = Evaluacion::find($id);
+        
+        if (!$evaluacion) {
+            return $this->sendError('Evaluación no encontrada.', [], 404);
+        }
+
+        try {
+            $evaluacion->delete();
+            return $this->sendResponse([], 'Evaluación eliminada correctamente.');
+        } catch (\Exception $e) {
+            return $this->sendError('Error al eliminar la evaluación.', [$e->getMessage()], 500);
+        }
+    }
+
 }

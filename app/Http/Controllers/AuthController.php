@@ -70,13 +70,40 @@ class AuthController extends Controller
      * @bodyParam nombre string required Nombre completo. Example: Nuevo Usuario
      * @bodyParam email string required Correo único. Example: nuevo@example.com
      * @bodyParam password string required Mínimo 8 caracteres. Example: password123
-     * @bodyParam password_confirmation string required Debe coincidir con password. Example: password123
      * @bodyParam id_rol integer required ID del rol. Example: 2
      * @response 201 {
-     * "success": true,
-     * "data": { "token": "1|ra67sdf...", "user": {...} },
-     * "message": "Usuario registrado correctamente."
-     * }
+     *"success": true,
+     *"data": {
+     *    "token": "4|Y7CHpCxOr...",
+     *    "user": {
+     *        "nombre": "maestro",
+     *        "email": "maestro@mail.com",
+     *        "id_rol": 2,
+     *        "updated_at": "2026-03-08T05:50:38.000000Z",
+     *        "created_at": "2026-03-08T05:50:38.000000Z",
+     *        "id_usuario": 3,
+     *        "rol": {
+     *            "id_rol": 2,
+     *            "nombre_rol": "Alumno",
+     *            "created_at": "2026-03-06T18:01:00.000000Z",
+     *            "updated_at": "2026-03-06T18:01:00.000000Z"
+     *        }
+     *    }
+     *},
+     *"message": "Usuario registrado correctamente."
+     *}
+     * @response 401 { "message": "Unauthenticated." }
+     * @response 422 {
+     *"message": "The password field confirmation does not match. (and 1 more error)",
+     *"errors": {
+     *    "password": [
+     *        "The password field confirmation does not match."
+     *    ],
+     *    "id_rol": [
+     *        "The id rol field is required."
+     *    ]
+     *}
+     *}
      */
     public function register(Request $request)
     {
@@ -104,6 +131,7 @@ class AuthController extends Controller
      * Cerrar sesión.
      * @authenticated
      * @response 200 { "success": true, "data": [], "message": "Sesión cerrada y token eliminado." }
+     * @response 401 { "message": "Unauthenticated." }
      */
     public function logout(Request $request)
     {
@@ -114,7 +142,32 @@ class AuthController extends Controller
     /**
      * Obtener perfil del usuario logueado.
      * @authenticated
-     * @response 200 { "success": true, "data": { "id_usuario": 1, "nombre": "...", "alumno": {...} }, "message": "Datos del usuario logueado." }
+     * @response 200 { 
+     *"success": true,
+     *"data": {
+     *    "id_usuario": 1,
+     *    "nombre": "Profe Troncoso",
+     *    "email": "maestro@test.com",
+     *    "id_rol": 1,
+     *    "created_at": "2026-03-06T18:01:01.000000Z",
+     *    "updated_at": "2026-03-06T18:01:01.000000Z",
+     *    "rol": {
+     *        "id_rol": 1,
+     *        "nombre_rol": "Maestro",
+     *        "created_at": "2026-03-06T18:01:00.000000Z",
+     *        "updated_at": "2026-03-06T18:01:00.000000Z"
+     *    },
+     *    "alumno": null,
+     *    "maestro": {
+     *        "id_usuario": 1,
+     *        "created_at": "2026-03-06T18:01:01.000000Z",
+     *        "updated_at": "2026-03-06T18:01:01.000000Z",
+     *        "grupos": []
+     *    }
+     *},
+     *"message": "Datos del usuario logueado."
+     *}
+     * @response 401 { "message": "Unauthenticated." }
      */
     public function me(Request $request)
     {
