@@ -93,6 +93,7 @@ class AuthController extends Controller
      *"message": "Usuario registrado correctamente."
      *}
      * @response 401 { "message": "Unauthenticated." }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      * @response 422 {
      *"message": "The password field confirmation does not match. (and 1 more error)",
      *"errors": {
@@ -140,43 +141,35 @@ class AuthController extends Controller
     }
 
     /**
-     * Obtener perfil del usuario logueado.
-     * @authenticated
-     * @response 200 { 
-     *"success": true,
-     *"data": {
-     *    "id_usuario": 1,
-     *    "nombre": "Profe Troncoso",
-     *    "email": "maestro@test.com",
-     *    "id_rol": 1,
-     *    "created_at": "2026-03-06T18:01:01.000000Z",
-     *    "updated_at": "2026-03-06T18:01:01.000000Z",
-     *    "rol": {
-     *        "id_rol": 1,
-     *        "nombre_rol": "Maestro",
-     *        "created_at": "2026-03-06T18:01:00.000000Z",
-     *        "updated_at": "2026-03-06T18:01:00.000000Z"
-     *    },
-     *    "alumno": null,
-     *    "maestro": {
-     *        "id_usuario": 1,
-     *        "created_at": "2026-03-06T18:01:01.000000Z",
-     *        "updated_at": "2026-03-06T18:01:01.000000Z",
-     *        "grupos": []
-     *    }
-     *},
-     *"message": "Datos del usuario logueado."
-     *}
+     * Obtener perfil del usuario autenticado.
+     * * Devuelve los datos del usuario logueado. Dependiendo de su rol (Alumno, Maestro o Admin), incluye dinámicamente sus grupos y materias correspondientes.
+     * <aside class="notice"><strong>Roles permitidos:</strong> Todos los usuarios autenticados.</aside>
+     * * @authenticated
+     * @response 200 {
+     * "success": true,
+     * "data": {
+     * "id_usuario": 1,
+     * "nombre": "Juan Pérez",
+     * "email": "juan@example.com",
+     * "rol": { "id_rol": 2, "nombre_rol": "Alumno" },
+     * "alumno": {
+     * "num_ctrl": "19030001",
+     * "grupos": [ { "id_grupo": 1, "materia": { "nombre_materia": "Programación Web" } } ]
+     * }
+     * },
+     * "message": "Datos del usuario logueado."
+     * }
      * @response 401 { "message": "Unauthenticated." }
      */
     public function me(Request $request)
     {
-        $user = $request->user()->load(['rol', 'alumno', 'maestro']);
+        $user = $request->user()->load('rol');
+        $nombreRol = $user->rol->nombre_rol ?? '';
 
-        if ($user->id_rol == 2 && $user->alumno) {
-            $user->alumno->load('grupos.materia');
-        } elseif ($user->id_rol == 1 && $user->maestro) {
-            $user->maestro->load('grupos.materia');
+        if ($nombreRol === 'Alumno') {
+            $user->load('alumno.grupos.materia');
+        } elseif ($nombreRol === 'Maestro') {
+            $user->load('maestro.grupos.materia');
         }
 
         return $this->sendResponse($user, 'Datos del usuario logueado.');

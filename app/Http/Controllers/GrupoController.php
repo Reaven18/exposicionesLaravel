@@ -4,18 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Grupo;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @group Gestión de Grupos
  *
  * Endpoints para administrar Grupos de una materia y la inscripción de alumnos.
  */
-class GrupoController extends Controller
+class GrupoController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show']),
+            new Middleware('role:Maestro,Admin', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Listar todos los grupos.
      * * Obtiene una lista de todos los grupos junto con la información de su materia y el maestro asignado.
-     *
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @response 200 {
      * "success": true,
      * "data": [
@@ -39,7 +50,8 @@ class GrupoController extends Controller
 
     /**
      * Crear un nuevo grupo.
-     *
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
      * @bodyParam id_materia integer required El ID de la materia. Example: 1
      * @bodyParam id_maestro integer required El ID del usuario que es maestro. Example: 2
      * @bodyParam grupo string required El identificador del grupo (ej. A, B, 401). Max: 10 caracteres. Example: 601-A
@@ -59,6 +71,9 @@ class GrupoController extends Controller
      * @response 422 {
      * "message": "The given data was invalid.",
      * "errors": { "id_materia": ["The selected id materia is invalid."] }
+     * }
+     * @response 403 {
+     * "message": "Access denied. You do not have the correct role."
      * }
      */
     public function store(Request $request)
@@ -81,7 +96,8 @@ class GrupoController extends Controller
     /**
      * Mostrar un grupo específico.
      * * Retorna los detalles de un grupo incluyendo la lista de alumnos inscritos.
-     *
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID del grupo. Example: 1
      *
      * @response 200 {
@@ -116,7 +132,8 @@ class GrupoController extends Controller
     /**
      * Inscribir alumnos al grupo.
      * * Actualiza la lista de alumnos mediante el método sync (reemplaza la lista actual por la nueva).
-     *
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID del grupo. Example: 1
      * @bodyParam alumnos int[] required Array con los IDs (id_usuario) de los alumnos a inscribir. Example: [10, 11, 12]
      *
@@ -132,6 +149,9 @@ class GrupoController extends Controller
      * "success": false,
      * "message": "Grupo no encontrado.",
      * "data": []
+     * }
+     * @response 403 {
+     * "message": "Access denied. You do not have the correct role."
      * }
      */
     public function inscribirAlumnos(Request $request, $id)
@@ -154,7 +174,8 @@ class GrupoController extends Controller
 
     /**
      * Eliminar un grupo.
-     *
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID del grupo a eliminar. Example: 1
      *
      * @response 200 {
@@ -166,6 +187,9 @@ class GrupoController extends Controller
      * "success": false,
      * "message": "Grupo no encontrado.",
      * "data": []
+     * }
+     * @response 403 {
+     * "message": "Access denied. You do not have the correct role."
      * }
      */
     public function destroy($id)

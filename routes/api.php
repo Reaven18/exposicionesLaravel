@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// Importación de todos tus controladores
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\MaestroController;
@@ -20,22 +19,20 @@ use App\Http\Controllers\MateriaController;
 // Cualquiera puede intentar loguearse
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-
 /*
 |--------------------------------------------------------------------------
 | RUTAS PROTEGIDAS (Requieren Token de Sanctum)
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth:sanctum')->group(function () {
-
     // --- Autenticación y Usuario Actual ---
-    Route::get('/me', [AuthController::class, 'me']); // El endpoint que faltaba
+    Route::get('/me', [AuthController::class, 'me']); 
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])
+        ->middleware('role:Admin')
+        ->name('register');
 
-
-    // --- CRUDs Automáticos (apiResource) ---
-    // Esto crea GET, POST, PUT y DELETE para cada uno
+    // --- CRUDs Automáticos (La seguridad vive en los controladores) ---
     Route::apiResource('alumnos', AlumnoController::class);
     Route::apiResource('maestros', MaestroController::class);
     Route::apiResource('rubricas', RubricaController::class);
@@ -45,12 +42,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('equipos', EquipoController::class);
     Route::apiResource('materias', MateriaController::class);
 
-    // --- Rutas Especiales (Lógica Extra) ---
-
-    // Inscribir lista de alumnos a un grupo
+    // --- Rutas Especiales (Lógica Extra) --- 
     Route::post('grupos/{id}/inscribir', [GrupoController::class, 'inscribirAlumnos']);
-
-    // Actualizar integrantes de un equipo
     Route::put('equipos/{id}/integrantes', [EquipoController::class, 'updateIntegrantes']);
-
+    Route::get('/mis-calificaciones', [AlumnoController::class, 'misCalificaciones']);
 });

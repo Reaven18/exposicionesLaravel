@@ -4,17 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Exposicion;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @group Gestión de Exposiciones
  *
  * Endpoints para programar, actualizar y consultar las exposiciones de los equipos.
  */
-class ExposicionController extends Controller
+class ExposicionController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show']),
+            new Middleware('role:Maestro,Admin', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Listar exposiciones.
-     * @authenticated
+     * * Obtiene el listado completo de exposiciones programadas.
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @response 200 {
      * "success": true,
      * "data": [
@@ -41,7 +53,9 @@ class ExposicionController extends Controller
 
     /**
      * Programar exposición.
-     * @authenticated
+     * * Asigna un tema, fecha y rúbrica a un equipo para su presentación.
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
      * @bodyParam id_equipo integer required ID del equipo asignado. Example: 1
      * @bodyParam id_rubrica integer required ID de la rúbrica a aplicar. Example: 1
      * @bodyParam tema string required Título de la exposición. Example: Inteligencia Artificial
@@ -57,6 +71,7 @@ class ExposicionController extends Controller
      * "message": "Exposición programada correctamente."
      * }
      * @response 422 { "message": "The fecha field is required.", "errors": { "fecha": ["..."] } }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      */
     public function store(Request $request)
     {
@@ -74,7 +89,8 @@ class ExposicionController extends Controller
     /**
      * Ver exposición.
      * * Obtiene información exhaustiva: integrantes del equipo, criterios de evaluación y evaluaciones recibidas.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID de la exposición.
      * @response 200 {
      * "success": true,
@@ -98,11 +114,15 @@ class ExposicionController extends Controller
 
     /**
      * Actualizar exposición.
-     * @authenticated
-     * @urlParam id integer required
+     * * Modifica el tema, la fecha o la rúbrica de una exposición ya programada.
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
+     * @urlParam id integer required ID de la exposición.
      * @bodyParam tema string Nuevo tema. Example: IA Generativa
      * @bodyParam fecha string Nueva fecha. Example: 2026-07-01 11:00:00
      * @response 200 { "success": true, "data": { "id_expo": 1, "tema": "IA Generativa" }, "message": "Exposición actualizada." }
+     * @response 404 { "success": false, "message": "Exposición no encontrada." }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      */
     public function update(Request $request, $id)
     {
@@ -115,9 +135,13 @@ class ExposicionController extends Controller
 
     /**
      * Eliminar exposición.
-     * @authenticated
-     * @urlParam id integer required
+     * * Cancela y elimina una exposición del sistema.
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
+     * @urlParam id integer required ID de la exposición.
      * @response 200 { "success": true, "data": [], "message": "Exposición eliminada." }
+     * @response 404 { "success": false, "message": "Exposición no encontrada." }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      */
     public function destroy($id)
     {

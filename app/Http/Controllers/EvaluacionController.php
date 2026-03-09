@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Evaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @group Gestión de Evaluaciones
  *
  * Endpoints para registrar y consultar las evaluaciones realizadas por los usuarios a las exposiciones.
  */
-class EvaluacionController extends Controller
+class EvaluacionController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show', 'store']),
+            new Middleware('role:Maestro,Admin', only: ['destroy']),
+        ];
+    }
+
     /**
      * Listar evaluaciones.
      * * Recupera el historial completo de evaluaciones con sus detalles técnicos.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @response 200 {
      * "success": true,
      * "data": [
@@ -48,8 +59,9 @@ class EvaluacionController extends Controller
 
     /**
      * Guardar evaluación.
-     * * Registra una nueva evaluación y sus calificaciones individuales por criterio dentro de una transacción.
-     * @authenticated
+     * * Registra una nueva evaluación y sus calificaciones individuales por criterio dentro de una transacción. Ideal para procesos de co-evaluación.
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @bodyParam id_expo integer required ID de la exposición a evaluar. Example: 1
      * @bodyParam id_usuario integer required ID del evaluador. Example: 1
      * @bodyParam observaciones string Notas u observaciones adicionales. Example: Muy buena dicción.
@@ -114,7 +126,8 @@ class EvaluacionController extends Controller
 
     /**
      * Ver evaluación específica.
-     *@authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID de la evaluación. Example: 1
      * @response 200 {
      * "success": true,
@@ -122,12 +135,12 @@ class EvaluacionController extends Controller
      * "id_evaluacion": 1,
      * "exposicion": { "tema": "IA", "equipo": { "equipo": "Los Linces" } },
      * "detalles": [{
-     *           "id_criterios": 1,
-     *           "calificacion": 9.5,
-     *           "criterio": {
-     *               "nombre_criterio": "Dominio"
-     *           }
-     *       }]
+     * "id_criterios": 1,
+     * "calificacion": 9.5,
+     * "criterio": {
+     * "nombre_criterio": "Dominio"
+     * }
+     * }]
      * },
      * "message": "Detalle de evaluación obtenido."
      * }
@@ -143,7 +156,8 @@ class EvaluacionController extends Controller
     /**
      * Eliminar evaluación.
      * * Elimina una evaluación específica del sistema. Si la base de datos tiene configurado ON DELETE CASCADE, también se eliminarán sus detalles de calificación.
-     * @authenticated
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID de la evaluación a eliminar. Example: 1
      * @response 200 {
      * "success": true,
@@ -155,6 +169,7 @@ class EvaluacionController extends Controller
      * "message": "Evaluación no encontrada.",
      * "data": []
      * }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      * @response 500 {
      * "success": false,
      * "message": "Error al eliminar la evaluación.",
@@ -176,5 +191,4 @@ class EvaluacionController extends Controller
             return $this->sendError('Error al eliminar la evaluación.', [$e->getMessage()], 500);
         }
     }
-
 }

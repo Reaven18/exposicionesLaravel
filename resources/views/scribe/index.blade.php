@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>ExposicionesLaravel API Documentation</title>
+    <title>Laravel API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -26,7 +26,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://localhost:8000";
+        var tryItOutBaseUrl = "http://localhost";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -86,6 +86,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-alumnos-DELETEapi-alumnos--id-">
                                 <a href="#gestion-de-alumnos-DELETEapi-alumnos--id-">Eliminar un alumno.</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="gestion-de-alumnos-GETapi-mis-calificaciones">
+                                <a href="#gestion-de-alumnos-GETapi-mis-calificaciones">Mis Calificaciones.</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-gestion-de-autenticacion" class="tocify-header">
@@ -97,7 +100,7 @@
                                 <a href="#gestion-de-autenticacion-POSTapi-login">Inicio de sesión.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-autenticacion-GETapi-me">
-                                <a href="#gestion-de-autenticacion-GETapi-me">Obtener perfil del usuario logueado.</a>
+                                <a href="#gestion-de-autenticacion-GETapi-me">Obtener perfil del usuario autenticado.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-autenticacion-POSTapi-logout">
                                 <a href="#gestion-de-autenticacion-POSTapi-logout">Cerrar sesión.</a>
@@ -247,6 +250,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-rubricas-GETapi-rubricas--id-">
                                 <a href="#gestion-de-rubricas-GETapi-rubricas--id-">Ver rúbrica.</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="gestion-de-rubricas-PUTapi-rubricas--id-">
+                                <a href="#gestion-de-rubricas-PUTapi-rubricas--id-">Actualizar rúbrica.</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="gestion-de-rubricas-DELETEapi-rubricas--id-">
                                 <a href="#gestion-de-rubricas-DELETEapi-rubricas--id-">Eliminar rúbrica.</a>
                             </li>
@@ -261,7 +267,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: March 8, 2026</li>
+        <li>Last updated: March 9, 2026</li>
     </ul>
 </div>
 
@@ -270,7 +276,7 @@
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:8000</code>
+    <strong>Base URL</strong>: <code>http://localhost</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -278,7 +284,8 @@
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is not authenticated.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 
         <h1 id="gestion-de-alumnos">Gestión de Alumnos</h1>
 
@@ -287,10 +294,13 @@ You can switch the language used with the tabs at the top right (or from the nav
                                 <h2 id="gestion-de-alumnos-GETapi-alumnos">Listar todos los alumnos.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Obtiene una lista de todos los alumnos registrados junto con su información de usuario.</li>
+<li>Obtiene una lista de todos los alumnos registrados junto con su información de usuario.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-alumnos">
@@ -299,17 +309,19 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/alumnos" \
+    --get "http://localhost/api/alumnos" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/alumnos"
+    "http://localhost/api/alumnos"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -363,7 +375,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-alumnos" data-method="GET"
       data-path="api/alumnos"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -394,6 +406,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-alumnos"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -422,10 +446,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-alumnos-POSTapi-alumnos">Crear un nuevo alumno.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Registra un usuario y su perfil de alumno correspondiente utilizando una transacción.</li>
+<li>Registra un usuario y su perfil de alumno correspondiente utilizando una transacción.<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-POSTapi-alumnos">
@@ -434,7 +461,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/alumnos" \
+    "http://localhost/api/alumnos" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -449,10 +477,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/alumnos"
+    "http://localhost/api/alumnos"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -492,6 +521,15 @@ fetch(url, {
         }
     },
     &quot;message&quot;: &quot;Alumno creado con &eacute;xito.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -539,7 +577,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-POSTapi-alumnos" data-method="POST"
       data-path="api/alumnos"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -569,6 +607,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/alumnos</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-alumnos"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -659,10 +709,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-alumnos-GETapi-alumnos--id-">Mostrar un alumno específico.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Retorna la información detallada de un alumno por su ID de usuario, incluyendo sus grupos y equipos.</li>
+<li>Retorna la información detallada de un alumno por su ID de usuario, incluyendo sus grupos y equipos.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-alumnos--id-">
@@ -671,17 +724,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/alumnos/1" \
+    --get "http://localhost/api/alumnos/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/alumnos/1"
+    "http://localhost/api/alumnos/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -744,7 +799,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-alumnos--id-" data-method="GET"
       data-path="api/alumnos/{id}"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -774,6 +829,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/alumnos/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-alumnos--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -816,10 +883,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-alumnos-PUTapi-alumnos--id-">Actualizar datos del alumno.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Actualiza la información básica del usuario y el número de control del alumno.</li>
+<li>Actualiza la información básica del usuario y el número de control del alumno.<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-PUTapi-alumnos--id-">
@@ -828,7 +898,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/alumnos/1" \
+    "http://localhost/api/alumnos/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -841,10 +912,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/alumnos/1"
+    "http://localhost/api/alumnos/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -884,6 +956,15 @@ fetch(url, {
 }</code>
  </pre>
             <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
             <p>Example response (404):</p>
         </blockquote>
                 <pre>
@@ -912,7 +993,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-PUTapi-alumnos--id-" data-method="PUT"
       data-path="api/alumnos/{id}"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -946,6 +1027,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/alumnos/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-alumnos--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -1025,10 +1118,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-alumnos-DELETEapi-alumnos--id-">Eliminar un alumno.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Elimina lógicamente (o físicamente) al usuario, y en cascada se eliminará su registro de alumno.</li>
+<li>Elimina lógicamente (o físicamente) al usuario, y en cascada se eliminará su registro de alumno.<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-DELETEapi-alumnos--id-">
@@ -1037,17 +1133,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/alumnos/1" \
+    "http://localhost/api/alumnos/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/alumnos/1"
+    "http://localhost/api/alumnos/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1070,6 +1168,15 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: [],
     &quot;message&quot;: &quot;Alumno eliminado correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -1101,7 +1208,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-DELETEapi-alumnos--id-" data-method="DELETE"
       data-path="api/alumnos/{id}"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -1131,6 +1238,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/alumnos/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-alumnos--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -1170,6 +1289,163 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="gestion-de-alumnos-GETapi-mis-calificaciones">Mis Calificaciones.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<ul>
+<li>Obtiene el historial de exposiciones y evaluaciones del alumno autenticado.<aside class="notice"><strong>Roles permitidos:</strong> Alumno.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
+
+<span id="example-requests-GETapi-mis-calificaciones">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/mis-calificaciones" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/mis-calificaciones"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-mis-calificaciones">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+&quot;success&quot;: true,
+&quot;data&quot;: [
+{
+&quot;equipo&quot;: &quot;Los Dinamita&quot;,
+&quot;exposiciones&quot;: [
+{ &quot;tema&quot;: &quot;IA&quot;, &quot;evaluaciones&quot;: [ { &quot;observaciones&quot;: &quot;Buen trabajo&quot;, &quot;detalles&quot;: [...] } ] }
+]
+}
+],
+&quot;message&quot;: &quot;Calificaciones obtenidas.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Solo los alumnos pueden ver sus calificaciones.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-mis-calificaciones" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-mis-calificaciones"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-mis-calificaciones"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-mis-calificaciones" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-mis-calificaciones">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-mis-calificaciones" data-method="GET"
+      data-path="api/mis-calificaciones"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-mis-calificaciones', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-mis-calificaciones"
+                    onclick="tryItOut('GETapi-mis-calificaciones');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-mis-calificaciones"
+                    onclick="cancelTryOut('GETapi-mis-calificaciones');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-mis-calificaciones"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/mis-calificaciones</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-mis-calificaciones"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-mis-calificaciones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-mis-calificaciones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                 <h1 id="gestion-de-autenticacion">Gestión de Autenticación</h1>
 
     <p>Endpoints para administrar el acceso al sistema.</p>
@@ -1177,6 +1453,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                 <h2 id="gestion-de-autenticacion-POSTapi-login">Inicio de sesión.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -1187,7 +1464,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/login" \
+    "http://localhost/api/login" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1199,10 +1477,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/login"
+    "http://localhost/api/login"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1279,7 +1558,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-POSTapi-login" data-method="POST"
       data-path="api/login"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -1309,6 +1588,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/login</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-login"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -1360,13 +1651,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="gestion-de-autenticacion-GETapi-me">Obtener perfil del usuario logueado.</h2>
+                    <h2 id="gestion-de-autenticacion-GETapi-me">Obtener perfil del usuario autenticado.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Devuelve los datos del usuario logueado. Dependiendo de su rol (Alumno, Maestro o Admin), incluye dinámicamente sus grupos y materias correspondientes.<aside class="notice"><strong>Roles permitidos:</strong> Todos los usuarios autenticados.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-GETapi-me">
 <blockquote>Example request:</blockquote>
@@ -1374,17 +1669,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/me" \
+    --get "http://localhost/api/me" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/me"
+    "http://localhost/api/me"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1407,23 +1704,22 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: {
         &quot;id_usuario&quot;: 1,
-        &quot;nombre&quot;: &quot;Profe Troncoso&quot;,
-        &quot;email&quot;: &quot;maestro@test.com&quot;,
-        &quot;id_rol&quot;: 1,
-        &quot;created_at&quot;: &quot;2026-03-06T18:01:01.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2026-03-06T18:01:01.000000Z&quot;,
+        &quot;nombre&quot;: &quot;Juan P&eacute;rez&quot;,
+        &quot;email&quot;: &quot;juan@example.com&quot;,
         &quot;rol&quot;: {
-            &quot;id_rol&quot;: 1,
-            &quot;nombre_rol&quot;: &quot;Maestro&quot;,
-            &quot;created_at&quot;: &quot;2026-03-06T18:01:00.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2026-03-06T18:01:00.000000Z&quot;
+            &quot;id_rol&quot;: 2,
+            &quot;nombre_rol&quot;: &quot;Alumno&quot;
         },
-        &quot;alumno&quot;: null,
-        &quot;maestro&quot;: {
-            &quot;id_usuario&quot;: 1,
-            &quot;created_at&quot;: &quot;2026-03-06T18:01:01.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2026-03-06T18:01:01.000000Z&quot;,
-            &quot;grupos&quot;: []
+        &quot;alumno&quot;: {
+            &quot;num_ctrl&quot;: &quot;19030001&quot;,
+            &quot;grupos&quot;: [
+                {
+                    &quot;id_grupo&quot;: 1,
+                    &quot;materia&quot;: {
+                        &quot;nombre_materia&quot;: &quot;Programaci&oacute;n Web&quot;
+                    }
+                }
+            ]
         }
     },
     &quot;message&quot;: &quot;Datos del usuario logueado.&quot;
@@ -1487,6 +1783,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -1526,17 +1834,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/logout" \
+    "http://localhost/api/logout" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/logout"
+    "http://localhost/api/logout"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1619,6 +1929,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-logout"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -1647,6 +1969,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-autenticacion-POSTapi-register">Registro de usuario.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -1657,7 +1980,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/register" \
+    "http://localhost/api/register" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1671,10 +1995,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/register"
+    "http://localhost/api/register"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1732,6 +2057,15 @@ fetch(url, {
 }</code>
  </pre>
             <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
             <p>Example response (422):</p>
         </blockquote>
                 <pre>
@@ -1766,7 +2100,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-POSTapi-register" data-method="POST"
       data-path="api/register"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -1796,6 +2130,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/register</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-register"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -1882,7 +2228,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Obtiene una lista de todos los equipos con su materia e integrantes.</li>
+<li>Obtiene una lista de todos los equipos con su materia e integrantes.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-equipos">
@@ -1891,17 +2239,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/equipos" \
+    --get "http://localhost/api/equipos" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos"
+    "http://localhost/api/equipos"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1921,37 +2271,38 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-&quot;success&quot;: true,
-&quot;data&quot;: [
-{
-&quot;id_equipo&quot;: 1,
-&quot;id_grupo&quot;: 2,
-&quot;equipo&quot;: &quot;Los Dinamita&quot;,
-&quot;active&quot;: 1,
-&quot;created_at&quot;: &quot;2026-03-08T10:00:00.000000Z&quot;,
-&quot;updated_at&quot;: &quot;2026-03-08T10:00:00.000000Z&quot;,
-&quot;grupo&quot;: {
-&quot;id_grupo&quot;: 2,
-&quot;id_materia&quot;: 5,
-&quot;materia&quot;: {
-&quot;id_materia&quot;: 5,
-&quot;nombre_materia&quot;: &quot;Programaci&oacute;n Web&quot;
-}
-},
-&quot;integrantes&quot;: [
-{
-&quot;id_usuario&quot;: 10,
-&quot;nombre&quot;: &quot;Juan P&eacute;rez&quot;,
-&quot;email&quot;: &quot;juan@example.com&quot;,
-&quot;usuario&quot;: {
-&quot;id_usuario&quot;: 10,
-&quot;nombre&quot;: &quot;Juan P&eacute;rez&quot;
-}
-}
-]
-}
-],
-&quot;message&quot;: &quot;Equipos recuperados exitosamente.&quot;</code>
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        {
+            &quot;id_equipo&quot;: 1,
+            &quot;id_grupo&quot;: 2,
+            &quot;equipo&quot;: &quot;Los Dinamita&quot;,
+            &quot;active&quot;: 1,
+            &quot;created_at&quot;: &quot;2026-03-08T10:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2026-03-08T10:00:00.000000Z&quot;,
+            &quot;grupo&quot;: {
+                &quot;id_grupo&quot;: 2,
+                &quot;id_materia&quot;: 5,
+                &quot;materia&quot;: {
+                    &quot;id_materia&quot;: 5,
+                    &quot;nombre_materia&quot;: &quot;Programaci&oacute;n Web&quot;
+                }
+            },
+            &quot;integrantes&quot;: [
+                {
+                    &quot;id_usuario&quot;: 10,
+                    &quot;nombre&quot;: &quot;Juan P&eacute;rez&quot;,
+                    &quot;email&quot;: &quot;juan@example.com&quot;,
+                    &quot;usuario&quot;: {
+                        &quot;id_usuario&quot;: 10,
+                        &quot;nombre&quot;: &quot;Juan P&eacute;rez&quot;
+                    }
+                }
+            ]
+        }
+    ],
+    &quot;message&quot;: &quot;Equipos recuperados exitosamente.&quot;
+}</code>
  </pre>
             <blockquote>
             <p>Example response (401):</p>
@@ -2011,6 +2362,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-equipos"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -2043,7 +2406,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Crea un nuevo equipo y asigna los alumnos integrantes mediante una transacción.</li>
+<li>Crea un nuevo equipo y asigna los alumnos integrantes mediante una transacción.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-POSTapi-equipos">
@@ -2052,7 +2417,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/equipos" \
+    "http://localhost/api/equipos" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2069,10 +2435,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos"
+    "http://localhost/api/equipos"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2203,6 +2570,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-equipos"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -2274,7 +2653,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Muestra la información detallada de un equipo, incluyendo sus integrantes y exposiciones programadas.</li>
+<li>Muestra la información detallada de un equipo, incluyendo sus integrantes y exposiciones programadas.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-equipos--id-">
@@ -2283,17 +2664,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/equipos/1" \
+    --get "http://localhost/api/equipos/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos/1"
+    "http://localhost/api/equipos/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2406,6 +2789,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-equipos--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -2451,7 +2846,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Elimina permanentemente el equipo del sistema.</li>
+<li>Elimina permanentemente el equipo del sistema.<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-DELETEapi-equipos--id-">
@@ -2460,17 +2857,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/equipos/1" \
+    "http://localhost/api/equipos/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos/1"
+    "http://localhost/api/equipos/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2493,6 +2892,15 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: [],
     &quot;message&quot;: &quot;Equipo eliminado correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -2555,6 +2963,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-equipos--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -2600,7 +3020,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Reemplaza la lista actual de integrantes del equipo por una nueva lista de IDs de alumnos.</li>
+<li>Reemplaza la lista actual de integrantes del equipo por una nueva lista de IDs de alumnos.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-PUTapi-equipos--id--integrantes">
@@ -2609,7 +3031,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/equipos/1/integrantes" \
+    "http://localhost/api/equipos/1/integrantes" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2623,10 +3046,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/equipos/1/integrantes"
+    "http://localhost/api/equipos/1/integrantes"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2745,6 +3169,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-equipos--id--integrantes"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -2809,7 +3245,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Recupera el historial completo de evaluaciones con sus detalles técnicos.</li>
+<li>Recupera el historial completo de evaluaciones con sus detalles técnicos.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-evaluaciones">
@@ -2818,17 +3256,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/evaluaciones" \
+    --get "http://localhost/api/evaluaciones" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/evaluaciones"
+    "http://localhost/api/evaluaciones"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2928,6 +3368,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-evaluaciones"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -2960,7 +3412,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Registra una nueva evaluación y sus calificaciones individuales por criterio dentro de una transacción.</li>
+<li>Registra una nueva evaluación y sus calificaciones individuales por criterio dentro de una transacción. Ideal para procesos de co-evaluación.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-POSTapi-evaluaciones">
@@ -2969,7 +3423,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/evaluaciones" \
+    "http://localhost/api/evaluaciones" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2988,10 +3443,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/evaluaciones"
+    "http://localhost/api/evaluaciones"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3117,6 +3573,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-evaluaciones"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -3221,7 +3689,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+* @authenticated
 
 <span id="example-requests-GETapi-evaluaciones--id-">
 <blockquote>Example request:</blockquote>
@@ -3229,17 +3698,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/evaluaciones/1" \
+    --get "http://localhost/api/evaluaciones/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/evaluaciones/1"
+    "http://localhost/api/evaluaciones/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3341,6 +3812,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-evaluaciones--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -3386,7 +3869,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Elimina una evaluación específica del sistema. Si la base de datos tiene configurado ON DELETE CASCADE, también se eliminarán sus detalles de calificación.</li>
+<li>Elimina una evaluación específica del sistema. Si la base de datos tiene configurado ON DELETE CASCADE, también se eliminarán sus detalles de calificación.<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-DELETEapi-evaluaciones--id-">
@@ -3395,17 +3880,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/evaluaciones/1" \
+    "http://localhost/api/evaluaciones/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/evaluaciones/1"
+    "http://localhost/api/evaluaciones/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3428,6 +3915,15 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: [],
     &quot;message&quot;: &quot;Evaluaci&oacute;n eliminada correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -3503,6 +3999,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-evaluaciones--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -3551,7 +4059,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Obtiene el listado completo de exposiciones programadas.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-GETapi-exposiciones">
 <blockquote>Example request:</blockquote>
@@ -3559,17 +4071,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/exposiciones" \
+    --get "http://localhost/api/exposiciones" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones"
+    "http://localhost/api/exposiciones"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3662,6 +4176,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-exposiciones"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -3693,7 +4219,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Asigna un tema, fecha y rúbrica a un equipo para su presentación.<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-POSTapi-exposiciones">
 <blockquote>Example request:</blockquote>
@@ -3701,7 +4231,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/exposiciones" \
+    "http://localhost/api/exposiciones" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3715,10 +4246,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones"
+    "http://localhost/api/exposiciones"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3757,6 +4289,15 @@ fetch(url, {
         }
     },
     &quot;message&quot;: &quot;Exposici&oacute;n programada correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -3821,6 +4362,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/exposiciones</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-exposiciones"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -3903,7 +4456,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Obtiene información exhaustiva: integrantes del equipo, criterios de evaluación y evaluaciones recibidas.</li>
+<li>Obtiene información exhaustiva: integrantes del equipo, criterios de evaluación y evaluaciones recibidas.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-exposiciones--id-">
@@ -3912,17 +4467,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/exposiciones/17" \
+    --get "http://localhost/api/exposiciones/17" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones/17"
+    "http://localhost/api/exposiciones/17"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4013,6 +4570,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-exposiciones--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -4057,7 +4626,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Modifica el tema, la fecha o la rúbrica de una exposición ya programada.<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-PUTapi-exposiciones--id-">
 <blockquote>Example request:</blockquote>
@@ -4065,7 +4638,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/exposiciones/17" \
+    "http://localhost/api/exposiciones/17" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4077,10 +4651,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones/17"
+    "http://localhost/api/exposiciones/17"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4111,6 +4686,25 @@ fetch(url, {
         &quot;tema&quot;: &quot;IA Generativa&quot;
     },
     &quot;message&quot;: &quot;Exposici&oacute;n actualizada.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Exposici&oacute;n no encontrada.&quot;
 }</code>
  </pre>
     </span>
@@ -4166,6 +4760,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-exposiciones--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -4200,7 +4806,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="17"
                data-component="url">
     <br>
-<p>Example: <code>17</code></p>
+<p>ID de la exposición. Example: <code>17</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4235,7 +4841,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Cancela y elimina una exposición del sistema.<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-DELETEapi-exposiciones--id-">
 <blockquote>Example request:</blockquote>
@@ -4243,17 +4853,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/exposiciones/17" \
+    "http://localhost/api/exposiciones/17" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/exposiciones/17"
+    "http://localhost/api/exposiciones/17"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4276,6 +4888,25 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: [],
     &quot;message&quot;: &quot;Exposici&oacute;n eliminada.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Exposici&oacute;n no encontrada.&quot;
 }</code>
  </pre>
     </span>
@@ -4327,6 +4958,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-exposiciones--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -4361,7 +5004,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="17"
                data-component="url">
     <br>
-<p>Example: <code>17</code></p>
+<p>ID de la exposición. Example: <code>17</code></p>
             </div>
                     </form>
 
@@ -4372,10 +5015,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                 <h2 id="gestion-de-grupos-GETapi-grupos">Listar todos los grupos.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Obtiene una lista de todos los grupos junto con la información de su materia y el maestro asignado.</li>
+<li>Obtiene una lista de todos los grupos junto con la información de su materia y el maestro asignado.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-grupos">
@@ -4384,17 +5030,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/grupos" \
+    --get "http://localhost/api/grupos" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos"
+    "http://localhost/api/grupos"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4454,7 +5102,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-grupos" data-method="GET"
       data-path="api/grupos"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -4485,6 +5133,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-grupos"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -4513,9 +5173,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-grupos-POSTapi-grupos">Crear un nuevo grupo.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+* @authenticated
 
 <span id="example-requests-POSTapi-grupos">
 <blockquote>Example request:</blockquote>
@@ -4523,7 +5185,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/grupos" \
+    "http://localhost/api/grupos" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4536,10 +5199,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos"
+    "http://localhost/api/grupos"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4586,6 +5250,15 @@ fetch(url, {
 }</code>
  </pre>
             <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
             <p>Example response (422):</p>
         </blockquote>
                 <pre>
@@ -4617,7 +5290,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-POSTapi-grupos" data-method="POST"
       data-path="api/grupos"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -4647,6 +5320,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/grupos</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-grupos"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -4713,10 +5398,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-grupos-GETapi-grupos--id-">Mostrar un grupo específico.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Retorna los detalles de un grupo incluyendo la lista de alumnos inscritos.</li>
+<li>Retorna los detalles de un grupo incluyendo la lista de alumnos inscritos.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-grupos--id-">
@@ -4725,17 +5413,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/grupos/1" \
+    --get "http://localhost/api/grupos/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos/1"
+    "http://localhost/api/grupos/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4800,7 +5490,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-grupos--id-" data-method="GET"
       data-path="api/grupos/{id}"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -4830,6 +5520,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/grupos/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-grupos--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -4872,9 +5574,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-grupos-DELETEapi-grupos--id-">Eliminar un grupo.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+* @authenticated
 
 <span id="example-requests-DELETEapi-grupos--id-">
 <blockquote>Example request:</blockquote>
@@ -4882,17 +5586,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/grupos/1" \
+    "http://localhost/api/grupos/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos/1"
+    "http://localhost/api/grupos/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4915,6 +5621,15 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: [],
     &quot;message&quot;: &quot;Grupo eliminado exitosamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -4946,7 +5661,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-DELETEapi-grupos--id-" data-method="DELETE"
       data-path="api/grupos/{id}"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -4976,6 +5691,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/grupos/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-grupos--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -5018,10 +5745,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-grupos-POSTapi-grupos--id--inscribir">Inscribir alumnos al grupo.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 <ul>
-<li>Actualiza la lista de alumnos mediante el método sync (reemplaza la lista actual por la nueva).</li>
+<li>Actualiza la lista de alumnos mediante el método sync (reemplaza la lista actual por la nueva).<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-POSTapi-grupos--id--inscribir">
@@ -5030,7 +5760,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/grupos/1/inscribir" \
+    "http://localhost/api/grupos/1/inscribir" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5045,10 +5776,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/grupos/1/inscribir"
+    "http://localhost/api/grupos/1/inscribir"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5085,6 +5817,15 @@ fetch(url, {
 }</code>
  </pre>
             <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
             <p>Example response (404):</p>
         </blockquote>
                 <pre>
@@ -5113,7 +5854,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-POSTapi-grupos--id--inscribir" data-method="POST"
       data-path="api/grupos/{id}/inscribir"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -5143,6 +5884,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/grupos/{id}/inscribir</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-grupos--id--inscribir"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -5208,7 +5961,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Recupera la lista de maestros con su información básica de usuario.</li>
+<li>Recupera la lista de maestros con su información básica de usuario.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-maestros">
@@ -5217,17 +5972,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/maestros" \
+    --get "http://localhost/api/maestros" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros"
+    "http://localhost/api/maestros"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5255,8 +6012,8 @@ fetch(url, {
             &quot;updated_at&quot;: &quot;2026-03-08T00:00:00.000000Z&quot;,
             &quot;usuario&quot;: {
                 &quot;id_usuario&quot;: 1,
-                &quot;nombre&quot;: &quot;Prof. Gabriel&quot;,
-                &quot;email&quot;: &quot;gabriel@docente.com&quot;,
+                &quot;nombre&quot;: &quot;Prof. L&oacute;pez&quot;,
+                &quot;email&quot;: &quot;lopez@docente.com&quot;,
                 &quot;id_rol&quot;: 1
             }
         }
@@ -5313,6 +6070,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-maestros"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -5345,7 +6114,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Crea un usuario y lo vincula automáticamente como maestro en una sola transacción.</li>
+<li>Crea un usuario y lo vincula automáticamente como maestro en una sola transacción.<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-POSTapi-maestros">
@@ -5354,12 +6125,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/maestros" \
+    "http://localhost/api/maestros" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"nombre\": \"Prof. Gabriel\",
-    \"email\": \"gabriel@docente.com\",
+    \"nombre\": \"Prof. López\",
+    \"email\": \"lopez@docente.com\",
     \"password\": \"secret123\",
     \"id_rol\": 1
 }"
@@ -5368,17 +6140,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros"
+    "http://localhost/api/maestros"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "nombre": "Prof. Gabriel",
-    "email": "gabriel@docente.com",
+    "nombre": "Prof. López",
+    "email": "lopez@docente.com",
     "password": "secret123",
     "id_rol": 1
 };
@@ -5403,11 +6176,20 @@ fetch(url, {
         &quot;id_usuario&quot;: 5,
         &quot;usuario&quot;: {
             &quot;id_usuario&quot;: 5,
-            &quot;nombre&quot;: &quot;Prof. Gabriel&quot;,
-            &quot;email&quot;: &quot;gabriel@docente.com&quot;
+            &quot;nombre&quot;: &quot;Prof. L&oacute;pez&quot;,
+            &quot;email&quot;: &quot;lopez@docente.com&quot;
         }
     },
     &quot;message&quot;: &quot;Maestro creado con &eacute;xito.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -5486,6 +6268,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-maestros"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -5517,10 +6311,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="nombre"                data-endpoint="POSTapi-maestros"
-               value="Prof. Gabriel"
+               value="Prof. López"
                data-component="body">
     <br>
-<p>Nombre completo del docente. Example: <code>Prof. Gabriel</code></p>
+<p>Nombre completo del docente. Example: <code>Prof. López</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -5529,10 +6323,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-maestros"
-               value="gabriel@docente.com"
+               value="lopez@docente.com"
                data-component="body">
     <br>
-<p>Correo institucional único. Example: <code>gabriel@docente.com</code></p>
+<p>Correo institucional único. Example: <code>lopez@docente.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -5567,7 +6361,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Obtiene el perfil del maestro junto con sus grupos y materias asignadas.</li>
+<li>Obtiene el perfil del maestro junto con sus grupos y materias asignadas.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-GETapi-maestros--id-">
@@ -5576,17 +6372,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/maestros/1" \
+    --get "http://localhost/api/maestros/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros/1"
+    "http://localhost/api/maestros/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5610,8 +6408,8 @@ fetch(url, {
     &quot;data&quot;: {
         &quot;id_usuario&quot;: 1,
         &quot;usuario&quot;: {
-            &quot;nombre&quot;: &quot;Prof. Gabriel&quot;,
-            &quot;email&quot;: &quot;gabriel@docente.com&quot;
+            &quot;nombre&quot;: &quot;Prof. L&oacute;pez&quot;,
+            &quot;email&quot;: &quot;lopez@docente.com&quot;
         },
         &quot;grupos&quot;: [
             {
@@ -5685,6 +6483,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-maestros--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -5730,7 +6540,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Actualiza la información básica del usuario (nombre/email) vinculado al maestro.</li>
+<li>Actualiza la información básica del usuario (nombre/email) vinculado al maestro.<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-PUTapi-maestros--id-">
@@ -5739,29 +6551,31 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/maestros/17" \
+    "http://localhost/api/maestros/17" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"nombre\": \"Gabriel actualizado\",
-    \"email\": \"g.nuevo@docente.com\"
+    \"nombre\": \"Prof. López Actualizado\",
+    \"email\": \"lopez.nuevo@docente.com\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros/17"
+    "http://localhost/api/maestros/17"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "nombre": "Gabriel actualizado",
-    "email": "g.nuevo@docente.com"
+    "nombre": "Prof. López Actualizado",
+    "email": "lopez.nuevo@docente.com"
 };
 
 fetch(url, {
@@ -5780,8 +6594,17 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
 &quot;success&quot;: true,
-&quot;data&quot;: { &quot;id_usuario&quot;: 1, &quot;nombre&quot;: &quot;Gabriel actualizado&quot;, &quot;maestro&quot;: {...} },
+&quot;data&quot;: { &quot;id_usuario&quot;: 1, &quot;nombre&quot;: &quot;Prof. L&oacute;pez Actualizado&quot;, &quot;maestro&quot;: {...} },
 &quot;message&quot;: &quot;Datos actualizados.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
     </span>
@@ -5837,6 +6660,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-maestros--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -5881,10 +6716,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="nombre"                data-endpoint="PUTapi-maestros--id-"
-               value="Gabriel actualizado"
+               value="Prof. López Actualizado"
                data-component="body">
     <br>
-<p>Nuevo nombre. Example: <code>Gabriel actualizado</code></p>
+<p>Nuevo nombre. Example: <code>Prof. López Actualizado</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -5893,10 +6728,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="PUTapi-maestros--id-"
-               value="g.nuevo@docente.com"
+               value="lopez.nuevo@docente.com"
                data-component="body">
     <br>
-<p>Nuevo correo. Example: <code>g.nuevo@docente.com</code></p>
+<p>Nuevo correo. Example: <code>lopez.nuevo@docente.com</code></p>
         </div>
         </form>
 
@@ -5906,7 +6741,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+* @authenticated
 
 <span id="example-requests-DELETEapi-maestros--id-">
 <blockquote>Example request:</blockquote>
@@ -5914,17 +6750,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/maestros/17" \
+    "http://localhost/api/maestros/17" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/maestros/17"
+    "http://localhost/api/maestros/17"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5947,6 +6785,15 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: [],
     &quot;message&quot;: &quot;Maestro eliminado correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
     </span>
@@ -5998,6 +6845,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-maestros--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -6043,9 +6902,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                 <h2 id="gestion-de-materias-GETapi-materias">Listar todas las materias.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>
+<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-GETapi-materias">
 <blockquote>Example request:</blockquote>
@@ -6053,17 +6918,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/materias" \
+    --get "http://localhost/api/materias" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/materias"
+    "http://localhost/api/materias"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6115,7 +6982,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-materias" data-method="GET"
       data-path="api/materias"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -6146,6 +7013,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-materias"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -6174,9 +7053,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-materias-POSTapi-materias">Crear una nueva materia.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>
+<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-POSTapi-materias">
 <blockquote>Example request:</blockquote>
@@ -6184,27 +7069,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/materias" \
+    "http://localhost/api/materias" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"materia\": \"Inteligencia Artificial\"
+    \"materia\": \"Inteligencia Artificial\\n* @response 201 {\\n\\\"success\\\": true,\\n\\\"data\\\": { \\\"id_materia\\\": 15, \\\"materia\\\": \\\"Inteligencia Artificial\\\" },\\n\\\"message\\\": \\\"Materia creado correctamente.\\\"\\n}\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/materias"
+    "http://localhost/api/materias"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "materia": "Inteligencia Artificial"
+    "materia": "Inteligencia Artificial\n* @response 201 {\n\"success\": true,\n\"data\": { \"id_materia\": 15, \"materia\": \"Inteligencia Artificial\" },\n\"message\": \"Materia creado correctamente.\"\n}"
 };
 
 fetch(url, {
@@ -6217,17 +7104,12 @@ fetch(url, {
 
 <span id="example-responses-POSTapi-materias">
             <blockquote>
-            <p>Example response (201):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;data&quot;: {
-        &quot;id_materia&quot;: 15,
-        &quot;materia&quot;: &quot;Inteligencia Artificial&quot;
-    },
-    &quot;message&quot;: &quot;Materia creado correctamente.&quot;
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -6262,7 +7144,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-POSTapi-materias" data-method="POST"
       data-path="api/materias"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -6292,6 +7174,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/materias</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-materias"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -6324,19 +7218,37 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="materia"                data-endpoint="POSTapi-materias"
-               value="Inteligencia Artificial"
+               value="Inteligencia Artificial
+* @response 201 {
+"success": true,
+"data": { "id_materia": 15, "materia": "Inteligencia Artificial" },
+"message": "Materia creado correctamente."
+}"
                data-component="body">
     <br>
-<p>Nombre de la materia. Example: <code>Inteligencia Artificial</code></p>
+<p>Nombre de la materia. Example: `Inteligencia Artificial</p>
+<ul>
+<li>@response 201 {
+"success": true,
+"data": { "id_materia": 15, "materia": "Inteligencia Artificial" },
+"message": "Materia creado correctamente."
+}`</li>
+</ul>
         </div>
         </form>
 
                     <h2 id="gestion-de-materias-GETapi-materias--id-">Mostrar una materia específica.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>
+<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-GETapi-materias--id-">
 <blockquote>Example request:</blockquote>
@@ -6344,17 +7256,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/materias/1" \
+    --get "http://localhost/api/materias/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/materias/1"
+    "http://localhost/api/materias/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6369,17 +7283,19 @@ fetch(url, {
 
 <span id="example-responses-GETapi-materias--id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
-                <pre>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;data&quot;: {
-        &quot;id_materia&quot;: 1,
-        &quot;materia&quot;: &quot;C&aacute;lculo Diferencial&quot;
-    },
-    &quot;message&quot;: &quot;Detalles de las materias obtenidos.&quot;
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -6411,7 +7327,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-materias--id-" data-method="GET"
       data-path="api/materias/{id}"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -6441,6 +7357,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/materias/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-materias--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -6483,9 +7411,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     <h2 id="gestion-de-materias-DELETEapi-materias--id-">Eliminar una materia.</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>
+<aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-DELETEapi-materias--id-">
 <blockquote>Example request:</blockquote>
@@ -6493,17 +7427,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/materias/1" \
+    "http://localhost/api/materias/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/materias/1"
+    "http://localhost/api/materias/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6518,14 +7454,12 @@ fetch(url, {
 
 <span id="example-responses-DELETEapi-materias--id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;data&quot;: [],
-    &quot;message&quot;: &quot;Materia eliminada exitosamente.&quot;
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -6557,7 +7491,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-DELETEapi-materias--id-" data-method="DELETE"
       data-path="api/materias/{id}"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -6587,6 +7521,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/materias/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-materias--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -6636,7 +7582,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Obtiene el catálogo completo de rúbricas junto con sus criterios.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-GETapi-rubricas">
 <blockquote>Example request:</blockquote>
@@ -6644,17 +7594,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/rubricas" \
+    --get "http://localhost/api/rubricas" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/rubricas"
+    "http://localhost/api/rubricas"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6740,6 +7692,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-rubricas"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -6772,7 +7736,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <ul>
-<li>Crea una rúbrica y asocia múltiples criterios de evaluación de forma atómica.</li>
+<li>Crea una rúbrica y asocia múltiples criterios de evaluación de forma atómica.<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
 </ul>
 
 <span id="example-requests-POSTapi-rubricas">
@@ -6781,7 +7747,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/rubricas" \
+    "http://localhost/api/rubricas" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -6798,10 +7765,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/rubricas"
+    "http://localhost/api/rubricas"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6843,6 +7811,15 @@ fetch(url, {
         ]
     },
     &quot;message&quot;: &quot;R&uacute;brica y criterios creados con &eacute;xito.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
 }</code>
  </pre>
             <blockquote>
@@ -6907,6 +7884,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/rubricas</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-rubricas"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -6988,7 +7977,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Muestra los detalles de una rúbrica específica y sus criterios.<aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-GETapi-rubricas--id-">
 <blockquote>Example request:</blockquote>
@@ -6996,17 +7989,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/rubricas/1" \
+    --get "http://localhost/api/rubricas/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/rubricas/1"
+    "http://localhost/api/rubricas/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7095,6 +8090,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-rubricas--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -7133,13 +8140,212 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="gestion-de-rubricas-PUTapi-rubricas--id-">Actualizar rúbrica.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<ul>
+<li>Actualiza el nombre de una rúbrica existente.<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
+
+<span id="example-requests-PUTapi-rubricas--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/rubricas/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"rubrica\": \"Rúbrica Parcial\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/rubricas/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "rubrica": "Rúbrica Parcial"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-rubricas--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{ &quot;success&quot;: true, &quot;data&quot;: {...}, &quot;message&quot;: &quot;R&uacute;brica actualizada correctamente.&quot; }</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;R&uacute;brica no encontrada.&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-rubricas--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-rubricas--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-rubricas--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-rubricas--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-rubricas--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-rubricas--id-" data-method="PUT"
+      data-path="api/rubricas/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-rubricas--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-rubricas--id-"
+                    onclick="tryItOut('PUTapi-rubricas--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-rubricas--id-"
+                    onclick="cancelTryOut('PUTapi-rubricas--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-rubricas--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/rubricas/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/rubricas/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-rubricas--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-rubricas--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-rubricas--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-rubricas--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>ID de la rúbrica. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>rubrica</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rubrica"                data-endpoint="PUTapi-rubricas--id-"
+               value="Rúbrica Parcial"
+               data-component="body">
+    <br>
+<p>Nombre descriptivo de la rúbrica. Example: <code>Rúbrica Parcial</code></p>
+        </div>
+        </form>
+
                     <h2 id="gestion-de-rubricas-DELETEapi-rubricas--id-">Eliminar rúbrica.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<ul>
+<li>Elimina una rúbrica del sistema (sus criterios se eliminarán en cascada si la base de datos está configurada para ello).<aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+</li>
+<li>@authenticated</li>
+</ul>
 
 <span id="example-requests-DELETEapi-rubricas--id-">
 <blockquote>Example request:</blockquote>
@@ -7147,17 +8353,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/rubricas/17" \
+    "http://localhost/api/rubricas/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/rubricas/17"
+    "http://localhost/api/rubricas/1"
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7180,6 +8388,26 @@ fetch(url, {
     &quot;success&quot;: true,
     &quot;data&quot;: [],
     &quot;message&quot;: &quot;R&uacute;brica eliminada correctamente.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Access denied. You do not have the correct role.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;R&uacute;brica no encontrada.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -7231,6 +8459,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-rubricas--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -7262,10 +8502,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-rubricas--id-"
-               value="17"
+               value="1"
                data-component="url">
     <br>
-<p>ID de la rúbrica. Example: <code>17</code></p>
+<p>ID de la rúbrica. Example: <code>1</code></p>
             </div>
                     </form>
 

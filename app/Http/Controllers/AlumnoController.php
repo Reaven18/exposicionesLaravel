@@ -7,18 +7,29 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @group Gestión de Alumnos
  *
  * Endpoints para administrar alumnos de la institución.
  */
-class AlumnoController extends Controller
+class AlumnoController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show', 'misCalificaciones']),
+            new Middleware('role:Admin', except: ['index', 'show', 'misCalificaciones']),
+        ];
+    }
+
     /**
      * Listar todos los alumnos.
      * * Obtiene una lista de todos los alumnos registrados junto con su información de usuario.
-     *
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @response 200 {
      * "success": true,
      * "data": [
@@ -45,7 +56,8 @@ class AlumnoController extends Controller
     /**
      * Crear un nuevo alumno.
      * * Registra un usuario y su perfil de alumno correspondiente utilizando una transacción.
-     *
+     * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
      * @bodyParam nombre string required El nombre completo del alumno. Example: Juan Pérez
      * @bodyParam email string required El correo electrónico institucional. Example: juan@example.com
      * @bodyParam password string required La contraseña del alumno (mínimo 8 caracteres). Example: password123
@@ -72,6 +84,7 @@ class AlumnoController extends Controller
      * "email": ["El correo electrónico ya ha sido registrado."]
      * }
      * }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      * @response 500 {
      * "success": false,
      * "message": "Error al procesar el registro",
@@ -113,7 +126,8 @@ class AlumnoController extends Controller
     /**
      * Mostrar un alumno específico.
      * * Retorna la información detallada de un alumno por su ID de usuario, incluyendo sus grupos y equipos.
-     *
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID del usuario asociado al alumno. Example: 1
      *
      * @response 200 {
@@ -149,7 +163,8 @@ class AlumnoController extends Controller
     /**
      * Actualizar datos del alumno.
      * * Actualiza la información básica del usuario y el número de control del alumno.
-     *
+     * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID del usuario asociado al alumno. Example: 1
      * @bodyParam nombre string El nuevo nombre del alumno. Example: Juan Modificado
      * @bodyParam email string El nuevo correo del alumno. Example: juan_mod@example.com
@@ -173,6 +188,7 @@ class AlumnoController extends Controller
      * "message": "Alumno no encontrado.",
      * "data": []
      * }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      */
     public function update(Request $request, $id)
     {
@@ -190,7 +206,8 @@ class AlumnoController extends Controller
     /**
      * Eliminar un alumno.
      * * Elimina lógicamente (o físicamente) al usuario, y en cascada se eliminará su registro de alumno.
-     *
+     * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID del usuario asociado al alumno a eliminar. Example: 1
      *
      * @response 200 {
@@ -203,6 +220,7 @@ class AlumnoController extends Controller
      * "message": "Usuario no existe.",
      * "data": []
      * }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      */
     public function destroy($id)
     {
@@ -212,5 +230,39 @@ class AlumnoController extends Controller
         $usuario->delete(); // Gracias al ON DELETE CASCADE, borra al Alumno también.
 
         return $this->sendResponse([], 'Alumno eliminado correctamente.');
+    }
+
+    /**
+     * Mis Calificaciones.
+     * * Obtiene el historial de exposiciones y evaluaciones del alumno autenticado.
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno.</aside>
+     * * @authenticated
+     * @response 200 {
+     * "success": true,
+     * "data": [
+     * {
+     * "equipo": "Los Dinamita",
+     * "exposiciones": [
+     * { "tema": "IA", "evaluaciones": [ { "observaciones": "Buen trabajo", "detalles": [...] } ] }
+     * ]
+     * }
+     * ],
+     * "message": "Calificaciones obtenidas."
+     * }
+     * @response 403 { "message": "Solo los alumnos pueden ver sus calificaciones." }
+     */
+    public function misCalificaciones(Request $request)
+    {
+        $user = $request->user()->load('rol');
+        
+        if ($user->rol->nombre_rol !== 'Alumno') {
+            return $this->sendError('Solo los alumnos pueden ver sus calificaciones.', [], 403);
+        }
+
+        $alumno = Alumno::with(['equipos.exposiciones.evaluaciones.detalles.criterio'])
+                        ->where('id_usuario', $user->id_usuario)
+                        ->first();
+
+        return $this->sendResponse($alumno->equipos, 'Calificaciones obtenidas.');
     }
 }

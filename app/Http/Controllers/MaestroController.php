@@ -7,18 +7,29 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @group Gestión de Maestros
  *
  * Endpoints para la administración de docentes, incluyendo la creación de su cuenta de usuario vinculada.
  */
-class MaestroController extends Controller
+class MaestroController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show']),
+            new Middleware('role:Admin', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Listar maestros.
      * * Recupera la lista de maestros con su información básica de usuario.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @response 200 {
      * "success": true,
      * "data": [
@@ -28,8 +39,8 @@ class MaestroController extends Controller
      * "updated_at": "2026-03-08T00:00:00.000000Z",
      * "usuario": {
      * "id_usuario": 1,
-     * "nombre": "Prof. Gabriel",
-     * "email": "gabriel@docente.com",
+     * "nombre": "Prof. López",
+     * "email": "lopez@docente.com",
      * "id_rol": 1
      * }
      * }
@@ -46,9 +57,10 @@ class MaestroController extends Controller
     /**
      * Crear maestro.
      * * Crea un usuario y lo vincula automáticamente como maestro en una sola transacción.
-     * @authenticated
-     * @bodyParam nombre string required Nombre completo del docente. Example: Prof. Gabriel
-     * @bodyParam email string required Correo institucional único. Example: gabriel@docente.com
+     * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
+     * @bodyParam nombre string required Nombre completo del docente. Example: Prof. López
+     * @bodyParam email string required Correo institucional único. Example: lopez@docente.com
      * @bodyParam password string required Contraseña (mín. 8 caracteres). Example: secret123
      * @bodyParam id_rol integer required ID del rol de maestro. Example: 1
      * @response 201 {
@@ -57,8 +69,8 @@ class MaestroController extends Controller
      * "id_usuario": 5,
      * "usuario": {
      * "id_usuario": 5,
-     * "nombre": "Prof. Gabriel",
-     * "email": "gabriel@docente.com"
+     * "nombre": "Prof. López",
+     * "email": "lopez@docente.com"
      * }
      * },
      * "message": "Maestro creado con éxito."
@@ -66,6 +78,9 @@ class MaestroController extends Controller
      * @response 422 {
      * "message": "The email has already been taken.",
      * "errors": { "email": ["The email has already been taken."] }
+     * }
+     * @response 403 {
+     * "message": "Access denied. You do not have the correct role."
      * }
      * @response 500 {
      * "success": false,
@@ -101,13 +116,14 @@ class MaestroController extends Controller
     /**
      * Ver maestro específico.
      * * Obtiene el perfil del maestro junto con sus grupos y materias asignadas.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID de usuario del maestro. Example: 1
      * @response 200 {
      * "success": true,
      * "data": {
      * "id_usuario": 1,
-     * "usuario": { "nombre": "Prof. Gabriel", "email": "gabriel@docente.com" },
+     * "usuario": { "nombre": "Prof. López", "email": "lopez@docente.com" },
      * "grupos": [
      * { "id_grupo": 10, "materia": { "nombre_materia": "Ciberseguridad" } }
      * ]
@@ -126,14 +142,18 @@ class MaestroController extends Controller
     /**
      * Actualizar maestro.
      * * Actualiza la información básica del usuario (nombre/email) vinculado al maestro.
-     * @authenticated
+     * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID de usuario.
-     * @bodyParam nombre string Nuevo nombre. Example: Gabriel actualizado
-     * @bodyParam email string Nuevo correo. Example: g.nuevo@docente.com
+     * @bodyParam nombre string Nuevo nombre. Example: Prof. López Actualizado
+     * @bodyParam email string Nuevo correo. Example: lopez.nuevo@docente.com
      * @response 200 {
      * "success": true,
-     * "data": { "id_usuario": 1, "nombre": "Gabriel actualizado", "maestro": {...} },
+     * "data": { "id_usuario": 1, "nombre": "Prof. López Actualizado", "maestro": {...} },
      * "message": "Datos actualizados."
+     * }
+     * @response 403 {
+     * "message": "Access denied. You do not have the correct role."
      * }
      */
     public function update(Request $request, $id)
@@ -146,9 +166,11 @@ class MaestroController extends Controller
 
     /**
      * Eliminar maestro.
-     * @authenticated
+     * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID del usuario a eliminar.
      * @response 200 { "success": true, "data": [], "message": "Maestro eliminado correctamente." }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      */
     public function destroy($id)
     {

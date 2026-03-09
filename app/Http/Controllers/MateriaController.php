@@ -4,17 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Materia;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @group Gestión de Materias
  *
  * Endpoints para la gestión del catálogo de materias de la institución.
  */
-class MateriaController extends Controller
+class MateriaController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show']),
+            new Middleware('role:Admin', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Listar todas las materias.
-     *
+     * * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @response 200 {
      * "success": true,
      * "data": [
@@ -32,10 +43,10 @@ class MateriaController extends Controller
 
     /**
      * Crear una nueva materia.
-     *
+     * * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
      * @bodyParam materia string required Nombre de la materia. Example: Inteligencia Artificial
-     *
-     * @response 201 {
+     * * @response 201 {
      * "success": true,
      * "data": { "id_materia": 15, "materia": "Inteligencia Artificial" },
      * "message": "Materia creado correctamente."
@@ -43,6 +54,9 @@ class MateriaController extends Controller
      * @response 422 {
      * "message": "The given data was invalid.",
      * "errors": { "materia": ["The materia field is required."] }
+     * }
+     * @response 403 {
+     * "message": "Access denied. You do not have the correct role."
      * }
      */
     public function store(Request $request)
@@ -62,10 +76,10 @@ class MateriaController extends Controller
 
     /**
      * Mostrar una materia específica.
-     *
+     * * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID de la materia. Example: 1
-     *
-     * @response 200 {
+     * * @response 200 {
      * "success": true,
      * "data": { "id_materia": 1, "materia": "Cálculo Diferencial" },
      * "message": "Detalles de las materias obtenidos."
@@ -89,10 +103,10 @@ class MateriaController extends Controller
 
     /**
      * Eliminar una materia.
-     *
+     * * <aside class="warning"><strong>Roles permitidos:</strong> Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required El ID de la materia a eliminar. Example: 1
-     *
-     * @response 200 {
+     * * @response 200 {
      * "success": true,
      * "data": [],
      * "message": "Materia eliminada exitosamente."
@@ -101,6 +115,9 @@ class MateriaController extends Controller
      * "success": false,
      * "message": "Materia no encontrada.",
      * "data": []
+     * }
+     * @response 403 {
+     * "message": "Access denied. You do not have the correct role."
      * }
      */
     public function destroy($id)

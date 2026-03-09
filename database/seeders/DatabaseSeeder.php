@@ -11,37 +11,52 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run(): void
+public function run(): void
     {
-        // Usa 'nombre_rol' porque así lo definiste en tu modelo Role
-        Role::create(['nombre_rol' => 'Maestro']);
-        Role::create(['nombre_rol' => 'Alumno']);
+        Role::firstOrCreate(['nombre_rol' => 'Maestro']);
+        Role::firstOrCreate(['nombre_rol' => 'Alumno']);
+        Role::firstOrCreate(['nombre_rol' => 'Admin']);
 
-        // 2. Creamos un Maestro de prueba
-        $userMaestro = User::create([
-            'nombre' => 'Profe Troncoso',
-            'email' => 'maestro@test.com',
-            'password' => Hash::make('secret123'),
-            'id_rol' => 1
-        ]);
+        $rolMaestro = Role::where('nombre_rol', 'Maestro')->first();
+        $rolAlumno  = Role::where('nombre_rol', 'Alumno')->first();
+        $rolAdmin   = Role::where('nombre_rol', 'Admin')->first();
 
-        Maestro::create([
+        User::firstOrCreate(
+            ['email' => 'admin@test.com'],
+            [
+                'nombre'   => 'Administrador del Sistema',
+                'password' => Hash::make('admin123'), //cambiamos mas bien quitamos  luego jajaja
+                'id_rol'   => $rolAdmin->id_rol
+            ]
+        );
+
+        $userMaestro = User::firstOrCreate(
+            ['email' => 'maestro@test.com'],
+            [
+                'nombre'   => 'Profe Troncoso',
+                'password' => Hash::make('secret123'),
+                'id_rol'   => $rolMaestro->id_rol
+            ]
+        );
+
+        Maestro::firstOrCreate([
             'id_usuario' => $userMaestro->id_usuario
         ]);
 
-        // 3. Creamos un Alumno de prueba
-        $userAlumno = User::create([
-            'nombre' => 'Juanito Pérez',
-            'email' => 'alumno@test.com',
-            'password' => Hash::make('secret123'),
-            'id_rol' => 2
-        ]);
+        $userAlumno = User::firstOrCreate(
+            ['email' => 'alumno@test.com'],
+            [
+                'nombre'   => 'Juanito Pérez',
+                'password' => Hash::make('secret123'),
+                'id_rol'   => $rolAlumno->id_rol
+            ]
+        );
 
-        Alumno::create([
+        Alumno::firstOrCreate([
             'id_usuario' => $userAlumno->id_usuario,
-            'num_ctrl' => '22030128'
+            'num_ctrl'   => '22030128'
         ]);
 
-        $this->command->info('Base de datos poblada con éxito: maestro@test.com y alumno@test.com');
+        $this->command->info('Base de datos poblada: admin@test.com, maestro@test.com y alumno@test.com');
     }
 }

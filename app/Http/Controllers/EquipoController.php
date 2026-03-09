@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @group Gestión de Equipos
  *
  * Endpoints para administrar los equipos de trabajo, sus integrantes y su relación con las materias.
  */
-class EquipoController extends Controller
+class EquipoController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show', 'store', 'updateIntegrantes']),
+            new Middleware('role:Maestro,Admin', only: ['destroy']),
+        ];
+    }
+
     /**
      * Listar equipos.
      * * Obtiene una lista de todos los equipos con su materia e integrantes.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @response 200 {
      * "success": true,
      * "data": [
@@ -49,6 +60,7 @@ class EquipoController extends Controller
      * }
      * ],
      * "message": "Equipos recuperados exitosamente."
+     * }
      * @response 401 { "message": "Unauthenticated." }
      */
     public function index()
@@ -60,7 +72,8 @@ class EquipoController extends Controller
     /**
      * Crear un equipo.
      * * Crea un nuevo equipo y asigna los alumnos integrantes mediante una transacción.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @bodyParam id_grupo integer required ID del grupo al que pertenece. Example: 1
      * @bodyParam equipo string required Nombre identificador del equipo. Example: Los Dinamita
      * @bodyParam alumnos int[] required Array de IDs de usuarios (alumnos). Example: [10, 11, 12]
@@ -121,7 +134,8 @@ class EquipoController extends Controller
     /**
      * Ver un equipo específico.
      * * Muestra la información detallada de un equipo, incluyendo sus integrantes y exposiciones programadas.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID del equipo. Example: 1
      * @response 200 {
      * "success": true,
@@ -157,7 +171,8 @@ class EquipoController extends Controller
     /**
      * Actualizar integrantes.
      * * Reemplaza la lista actual de integrantes del equipo por una nueva lista de IDs de alumnos.
-     * @authenticated
+     * <aside class="notice"><strong>Roles permitidos:</strong> Alumno, Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID del equipo a actualizar. Example: 1
      * @bodyParam alumnos int[] required Nuevos IDs de alumnos integrantes. Example: [14, 15]
      * @response 200 {
@@ -203,13 +218,15 @@ class EquipoController extends Controller
     /**
      * Eliminar equipo.
      * * Elimina permanentemente el equipo del sistema.
-     * @authenticated
+     * <aside class="warning"><strong>Roles permitidos:</strong> Maestro, Admin.</aside>
+     * * @authenticated
      * @urlParam id integer required ID del equipo a eliminar. Example: 1
      * @response 200 {
      * "success": true,
      * "data": [],
      * "message": "Equipo eliminado correctamente."
      * }
+     * @response 403 { "message": "Access denied. You do not have the correct role." }
      * @response 404 {
      * "success": false,
      * "message": "Equipo no encontrado.",
