@@ -267,7 +267,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: March 9, 2026</li>
+        <li>Last updated: March 18, 2026</li>
     </ul>
 </div>
 
@@ -4467,7 +4467,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/exposiciones/17" \
+    --get "http://localhost/api/exposiciones/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4475,7 +4475,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/exposiciones/17"
+    "http://localhost/api/exposiciones/16"
 );
 
 const headers = {
@@ -4613,10 +4613,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-exposiciones--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>ID de la exposición. Example: <code>17</code></p>
+<p>ID de la exposición. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -4638,7 +4638,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/exposiciones/17" \
+    "http://localhost/api/exposiciones/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4651,7 +4651,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/exposiciones/17"
+    "http://localhost/api/exposiciones/16"
 );
 
 const headers = {
@@ -4803,10 +4803,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-exposiciones--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>ID de la exposición. Example: <code>17</code></p>
+<p>ID de la exposición. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4853,7 +4853,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/exposiciones/17" \
+    "http://localhost/api/exposiciones/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4861,7 +4861,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/exposiciones/17"
+    "http://localhost/api/exposiciones/16"
 );
 
 const headers = {
@@ -5001,10 +5001,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-exposiciones--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>ID de la exposición. Example: <code>17</code></p>
+<p>ID de la exposición. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -6551,7 +6551,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/maestros/17" \
+    "http://localhost/api/maestros/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -6564,7 +6564,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/maestros/17"
+    "http://localhost/api/maestros/16"
 );
 
 const headers = {
@@ -6703,10 +6703,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-maestros--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>ID de usuario. Example: <code>17</code></p>
+<p>ID de usuario. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -6750,7 +6750,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/maestros/17" \
+    "http://localhost/api/maestros/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -6758,7 +6758,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/maestros/17"
+    "http://localhost/api/maestros/16"
 );
 
 const headers = {
@@ -6888,10 +6888,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-maestros--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>ID del usuario a eliminar. Example: <code>17</code></p>
+<p>ID del usuario a eliminar. Example: <code>16</code></p>
             </div>
                     </form>
 
