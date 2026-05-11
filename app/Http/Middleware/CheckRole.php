@@ -14,16 +14,22 @@ class CheckRole
             abort(401, 'Unauthenticated.');
         }
 
-        $userRole = $request->user()->rol->nombre_rol ?? null;
+        $userRoles = $request->user()
+            ->roles()
+            ->pluck('nombre')
+            ->toArray();
 
-        if ($userRole === 'Admin') {
+        // Admin bypass
+        if (in_array('admin', $userRoles)) {
             return $next($request);
         }
 
-        if (!in_array($userRole, $roles)) {
-            abort(403, 'Access denied. You do not have the correct role.');
+        foreach ($roles as $rol) {
+            if (in_array($rol, $userRoles)) {
+                return $next($request);
+            }
         }
 
-        return $next($request);
+        abort(403, 'Access denied.');
     }
 }

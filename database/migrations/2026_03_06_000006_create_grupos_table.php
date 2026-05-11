@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up() {
         Schema::create('grupos', function (Blueprint $table) {
             $table->id('id_grupo');
-            $table->foreignId('id_materia')->constrained('materias', 'id_materia');
+            $table->foreignId('id_materia')->constrained('materias', 'id_materia')->onDelete('cascade');
             $table->foreignId('id_maestro')->constrained('maestros', 'id_usuario');
             $table->string('grupo', 10);
             $table->timestamps();

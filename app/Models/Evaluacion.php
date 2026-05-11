@@ -13,7 +13,9 @@ class Evaluacion extends Model
     protected $primaryKey = 'id_evaluacion';
      protected $fillable = [
         'id_expo',
-        'id_usuario'
+        'id_usuario',
+        'observaciones',
+        'fecha'
     ];
     public function exposicion()
     {
@@ -26,7 +28,7 @@ class Evaluacion extends Model
         return $this->belongsTo(User::class, 'id_usuario', 'id_usuario');
     }
 
-    
+
     public function detalles()
     {
         return $this->belongsToMany(Criterio::class, 'evaluacion_detalles', 'id_evaluacion', 'id_criterios')

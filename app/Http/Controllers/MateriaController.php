@@ -128,4 +128,14 @@ class MateriaController extends Controller implements HasMiddleware
         $materia->delete();
         return $this->sendResponse([], 'Materia eliminada exitosamente.');
     }
+
+     public function update(Request $request, $id)
+    {
+        $materia = Materia::find($id);
+        if (!$materia) return $this->sendError('Materia no encontrada.', [], 404);
+
+        $materia->update($request->only(['materia']));
+        return $this->sendResponse($materia, 'Materia actualizada.');
+    }
+
 }

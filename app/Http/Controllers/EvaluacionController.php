@@ -111,8 +111,8 @@ class EvaluacionController extends Controller implements HasMiddleware
                 ]);
 
                 foreach ($request->calificaciones as $item) {
-                    $nuevaEval->detalles()->create([
-                        'id_criterios' => $item['id_criterio'],
+                    $nuevaEval->detalles()->attach([
+                         $item['id_criterio'],
                         'calificacion' => $item['nota']
                     ]);
                 }
@@ -179,7 +179,7 @@ class EvaluacionController extends Controller implements HasMiddleware
     public function destroy($id)
     {
         $evaluacion = Evaluacion::find($id);
-        
+
         if (!$evaluacion) {
             return $this->sendError('Evaluación no encontrada.', [], 404);
         }
