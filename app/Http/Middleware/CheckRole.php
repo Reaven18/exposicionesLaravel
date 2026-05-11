@@ -16,7 +16,7 @@ class CheckRole
 
         $userRoles = $request->user()
             ->rol()
-            ->pluck('nombre')
+            ->pluck('nombre_rol')
             ->toArray();
 
         // Admin bypass
