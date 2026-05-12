@@ -46,5 +46,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('grupos/{id}/inscribir', [GrupoController::class, 'inscribirAlumnos']);
     Route::put('equipos/{id}/integrantes', [EquipoController::class, 'updateIntegrantes']);
     Route::get('/mis-calificaciones', [AlumnoController::class, 'misCalificaciones']);
-    Route::get('/mis-evaluaciones', [AlumnoController::class, 'misEvaluaciones']);
+    Route::get('/mis-evaluaciones', [AlumnoController::class, 'porEvaluar']);
 });
