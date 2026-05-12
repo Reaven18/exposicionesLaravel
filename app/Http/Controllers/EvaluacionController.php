@@ -95,7 +95,7 @@ class EvaluacionController extends Controller implements HasMiddleware
         $request->validate([
             'id_expo'      => 'required|exists:exposiciones,id_expo',
             'id_usuario'   => 'required|exists:usuarios,id_usuario',
-            'observaciones'=> 'nullable|string',
+            'observaciones' => 'nullable|string',
             'calificaciones' => 'required|array',
             'calificaciones.*.id_criterio' => 'required|exists:criterios,id_criterios',
             'calificaciones.*.nota'         => 'required|numeric|min:0|max:10'
@@ -106,15 +106,15 @@ class EvaluacionController extends Controller implements HasMiddleware
                 $nuevaEval = Evaluacion::create([
                     'id_expo'      => $request->id_expo,
                     'id_usuario'   => $request->id_usuario,
-                    'observaciones'=> $request->observaciones,
+                    'observaciones' => $request->observaciones,
                     'fecha'        => now()
                 ]);
 
                 foreach ($request->calificaciones as $item) {
-                    $nuevaEval->detalles()->attach([
-                         $item['id_criterio'],
-                        'calificacion' => $item['nota']
-                    ]);
+                    $nuevaEval->detalles()->attach(
+                        $item['id_criterio'],
+                        ['calificacion' => $item['nota']]
+                    );
                 }
                 return $nuevaEval->load('detalles.criterio');
             });
