@@ -14,6 +14,7 @@ class Rubrica extends Model
 
     protected $fillable = [
         'rubrica'
+        
     ];
 
     public function criterios()

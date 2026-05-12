@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alumno;
 use App\Models\User;
+use App\Models\Exposicion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -271,44 +272,61 @@ class AlumnoController extends Controller implements HasMiddleware
 
         if ($user->rol->nombre_rol !== 'Alumno') {
             return $this->sendError(
-                'Solo los alumnos pueden ver sus exposiciones por evaluar.',
+                'Solo los alumnos pueden ver exposiciones.',
                 [],
                 403
             );
         }
 
-        $alumno = Alumno::with('equipos')
+        $alumno = Alumno::with([
+            'grupos',
+            'equipos'
+        ])
             ->where('id_usuario', $user->id_usuario)
             ->first();
 
         if (!$alumno) {
-            return $this->sendError('Alumno no encontrado.', [], 404);
+            return $this->sendError(
+                'Alumno no encontrado.',
+                [],
+                404
+            );
         }
 
-        $equiposAlumno = $alumno->equipos->pluck('id_equipo');
+        // IDs de grupos donde está inscrito
+        $gruposIds = $alumno->grupos->pluck('id_grupo');
 
-        $alumno->load([
-            'equipos.exposiciones' => function ($query) use ($user, $equiposAlumno) {
+        // IDs de equipos donde pertenece
+        $equiposIds = $alumno->equipos->pluck('id_equipo');
 
-                $query->whereDoesntHave('evaluaciones', function ($q) use ($user) {
-                    $q->where('id_usuario', $user->id_usuario);
-                });
+        $exposiciones = Exposicion::with([
 
-                $query->whereNotIn('id_equipo', $equiposAlumno);
+            // Equipo expositor
+            'equipo',
+
+            // SOLO evaluación del alumno actual
+            'evaluaciones' => function ($q) use ($user) {
+
+                $q->where('id_usuario', $user->id_usuario)
+                    ->with([
+                        'detalles',
+                        'usuario'
+                    ]);
             }
-        ]);
 
-        if ($alumno->equipos->isEmpty()) {
-            return $this->sendResponse([], 'No hay exposiciones pendientes de evaluación.');
-        }
+        ])
 
-        if ($alumno->equipos->pluck('exposiciones')->flatten()->isEmpty()) {
-            return $this->sendResponse([], 'No hay exposiciones pendientes de evaluación.');
-        }
-        
+            // Exposiciones de grupos donde está inscrito
+            ->whereIn('id_grupo', $gruposIds)
+
+            // Excluir equipos propios
+            ->whereNotIn('id_equipo', $equiposIds)
+
+            ->get();
+
         return $this->sendResponse(
-            $alumno->equipos,
-            'Exposiciones por evaluar obtenidas.'
+            $exposiciones,
+            'Exposiciones obtenidas.'
         );
     }
 }
