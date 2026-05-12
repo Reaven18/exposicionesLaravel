@@ -116,7 +116,7 @@ class EvaluacionController extends Controller implements HasMiddleware
                         ['calificacion' => $item['nota']]
                     );
                 }
-                return $nuevaEval->load('detalles.criterio');
+                return $nuevaEval->load('detalles');
             });
             return $this->sendResponse($evaluacion, 'Evaluación registrada correctamente.', 201);
         } catch (\Exception $e) {
