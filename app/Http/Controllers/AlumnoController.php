@@ -306,23 +306,15 @@ class AlumnoController extends Controller implements HasMiddleware
             'evaluaciones' => function ($q) use ($user) {
 
                 $q->where('id_usuario', $user->id_usuario)
-                    ->with([
-                        'detalles',
-                        'usuario'
-                    ]);
+                    ->with('detalles');
             }
 
         ])
-
-            // SOLO equipos de grupos donde está inscrito
             ->whereHas('equipo', function ($q) use ($gruposIds) {
 
                 $q->whereIn('id_grupo', $gruposIds);
             })
-
-            // EXCLUIR equipos propios
             ->whereNotIn('id_equipo', $equiposIds)
-
             ->get();
 
         return $this->sendResponse(
