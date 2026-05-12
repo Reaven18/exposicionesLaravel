@@ -301,10 +301,8 @@ class AlumnoController extends Controller implements HasMiddleware
 
         $exposiciones = Exposicion::with([
 
-            // Equipo expositor
             'equipo',
 
-            // SOLO evaluación del alumno actual
             'evaluaciones' => function ($q) use ($user) {
 
                 $q->where('id_usuario', $user->id_usuario)
@@ -316,10 +314,13 @@ class AlumnoController extends Controller implements HasMiddleware
 
         ])
 
-            // Exposiciones de grupos donde está inscrito
-            ->whereIn('id_grupo', $gruposIds)
+            // SOLO equipos de grupos donde está inscrito
+            ->whereHas('equipo', function ($q) use ($gruposIds) {
 
-            // Excluir equipos propios
+                $q->whereIn('id_grupo', $gruposIds);
+            })
+
+            // EXCLUIR equipos propios
             ->whereNotIn('id_equipo', $equiposIds)
 
             ->get();
