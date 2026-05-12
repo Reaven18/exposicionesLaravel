@@ -298,6 +298,14 @@ class AlumnoController extends Controller implements HasMiddleware
             }
         ]);
 
+        if ($alumno->equipos->isEmpty()) {
+            return $this->sendResponse([], 'No hay exposiciones pendientes de evaluación.');
+        }
+
+        if ($alumno->equipos->pluck('exposiciones')->flatten()->isEmpty()) {
+            return $this->sendResponse([], 'No hay exposiciones pendientes de evaluación.');
+        }
+        
         return $this->sendResponse(
             $alumno->equipos,
             'Exposiciones por evaluar obtenidas.'
