@@ -21,7 +21,7 @@ class AlumnoController extends Controller implements HasMiddleware
     {
         return [
             new Middleware('role:Alumno,Maestro,Admin', only: ['index', 'show', 'misCalificaciones']),
-            new Middleware('role:Admin', except: ['index', 'show', 'misCalificaciones']),
+            new Middleware('role:Admin', except: ['index', 'show', 'misCalificaciones', 'porEvaluar']),
         ];
     }
 
@@ -265,12 +265,41 @@ class AlumnoController extends Controller implements HasMiddleware
         return $this->sendResponse($alumno->equipos, 'Calificaciones obtenidas.');
     }
 
-    public function porEvaluar()
+    public function porEvaluar(Request $request)
     {
+        $user = $request->user()->load('rol');
 
+        if ($user->rol->nombre_rol !== 'Alumno') {
+            return $this->sendError(
+                'Solo los alumnos pueden ver sus exposiciones por evaluar.',
+                [],
+                403
+            );
+        }
+
+        $alumno = Alumno::with('equipos')
+            ->where('id_usuario', $user->id_usuario)
+            ->first();
+
+        if (!$alumno) {
+            return $this->sendError('Alumno no encontrado.', [], 404);
+        }
+
+        $equiposAlumno = $alumno->equipos->pluck('id_equipo');
+
+        $alumno->load([
+            'equipos.exposiciones' => function ($query) use ($user, $equiposAlumno) {
+
+                $query->whereDoesntHave('evaluaciones', function ($q) use ($user) {
+                    $q->where('id_usuario', $user->id_usuario);
+                });
+
+                $query->whereNotIn('id_equipo', $equiposAlumno);
+            }
+        ]);
 
         return $this->sendResponse(
-            'nose',
+            $alumno->equipos,
             'Exposiciones por evaluar obtenidas.'
         );
     }
