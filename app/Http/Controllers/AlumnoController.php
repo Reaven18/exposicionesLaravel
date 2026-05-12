@@ -254,12 +254,12 @@ class AlumnoController extends Controller implements HasMiddleware
     public function misCalificaciones(Request $request)
     {
         $user = $request->user()->load('rol');
-        
+
         if ($user->rol->nombre_rol !== 'Alumno') {
             return $this->sendError('Solo los alumnos pueden ver sus calificaciones.', [], 403);
         }
 
-        $alumno = Alumno::with(['equipos.exposiciones.evaluaciones.detalles.criterio'])
+        $alumno = Alumno::with(['equipos.exposiciones.evaluaciones.detalles'])
                         ->where('id_usuario', $user->id_usuario)
                         ->first();
 

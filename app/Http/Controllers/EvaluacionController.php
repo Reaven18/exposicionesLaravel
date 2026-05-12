@@ -53,7 +53,7 @@ class EvaluacionController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $evaluaciones = Evaluacion::with(['exposicion', 'usuario', 'detalles.criterio'])->get();
+        $evaluaciones = Evaluacion::with(['exposicion', 'usuario', 'detalles'])->get();
         return $this->sendResponse($evaluaciones, 'Evaluaciones recuperadas.');
     }
 
