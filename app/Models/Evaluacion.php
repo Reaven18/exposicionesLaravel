@@ -32,7 +32,6 @@ class Evaluacion extends Model
     public function detalles()
     {
         return $this->belongsToMany(Criterio::class, 'evaluacion_detalles', 'id_evaluacion', 'id_criterios')
-                    ->withPivot('calificacion')
-                    ->withTimestamps();
+                    ->withPivot('calificacion');
     }
 }
