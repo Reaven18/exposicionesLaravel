@@ -26,7 +26,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 */
 Route::middleware('auth:sanctum')->group(function () {
     // --- Autenticación y Usuario Actual ---
-    Route::get('/me', [AuthController::class, 'me']); 
+    Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/register', [AuthController::class, 'register'])
         ->middleware('role:Admin')
@@ -42,8 +42,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('equipos', EquipoController::class);
     Route::apiResource('materias', MateriaController::class);
 
-    // --- Rutas Especiales (Lógica Extra) --- 
+    // --- Rutas Especiales (Lógica Extra) ---
     Route::post('grupos/{id}/inscribir', [GrupoController::class, 'inscribirAlumnos']);
     Route::put('equipos/{id}/integrantes', [EquipoController::class, 'updateIntegrantes']);
     Route::get('/mis-calificaciones', [AlumnoController::class, 'misCalificaciones']);
+    Route::get('/mis-evaluaciones', [MaestroController::class, 'misEvaluaciones']);
 });

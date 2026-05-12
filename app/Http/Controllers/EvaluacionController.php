@@ -148,7 +148,7 @@ class EvaluacionController extends Controller implements HasMiddleware
      */
     public function show($id)
     {
-        $evaluacion = Evaluacion::with(['exposicion.equipo', 'usuario', 'detalles.criterio'])->find($id);
+        $evaluacion = Evaluacion::with(['exposicion.equipo', 'usuario', 'detalles'])->find($id);
         if (!$evaluacion) return $this->sendError('Evaluación no encontrada.', [], 404);
         return $this->sendResponse($evaluacion, 'Detalle de evaluación obtenido.');
     }

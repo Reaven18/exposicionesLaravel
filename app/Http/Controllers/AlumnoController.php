@@ -117,7 +117,6 @@ class AlumnoController extends Controller implements HasMiddleware
             });
 
             return $this->sendResponse($alumno, 'Alumno creado con éxito.', 201);
-
         } catch (\Exception $e) {
             return $this->sendError('Error al procesar el registro', [$e->getMessage()], 500);
         }
@@ -150,8 +149,8 @@ class AlumnoController extends Controller implements HasMiddleware
     public function show($id)
     {
         $alumno = Alumno::with(['usuario', 'grupos', 'equipos'])
-                        ->where('id_usuario', $id)
-                        ->first();
+            ->where('id_usuario', $id)
+            ->first();
 
         if (!$alumno) {
             return $this->sendError('Alumno no encontrado.', [], 404);
@@ -260,9 +259,48 @@ class AlumnoController extends Controller implements HasMiddleware
         }
 
         $alumno = Alumno::with(['equipos.exposiciones.evaluaciones.detalles'])
-                        ->where('id_usuario', $user->id_usuario)
-                        ->first();
+            ->where('id_usuario', $user->id_usuario)
+            ->first();
 
         return $this->sendResponse($alumno->equipos, 'Calificaciones obtenidas.');
+    }
+
+    public function porEvaluar(Request $request)
+    {
+        $user = $request->user()->load('rol');
+
+        if ($user->rol->nombre_rol !== 'Alumno') {
+            return $this->sendError(
+                'Solo los alumnos pueden ver sus exposiciones por evaluar.',
+                [],
+                403
+            );
+        }
+
+        $alumno = Alumno::with('equipos')
+            ->where('id_usuario', $user->id_usuario)
+            ->first();
+
+        if (!$alumno) {
+            return $this->sendError('Alumno no encontrado.', [], 404);
+        }
+
+        $equiposAlumno = $alumno->equipos->pluck('id_equipo');
+
+        $alumno->load([
+            'equipos.exposiciones' => function ($query) use ($user, $equiposAlumno) {
+
+                $query->whereDoesntHave('evaluaciones', function ($q) use ($user) {
+                    $q->where('id_usuario', $user->id_usuario);
+                });
+
+                $query->whereNotIn('id_equipo', $equiposAlumno);
+            }
+        ]);
+
+        return $this->sendResponse(
+            $alumno->equipos,
+            'Exposiciones por evaluar obtenidas.'
+        );
     }
 }
